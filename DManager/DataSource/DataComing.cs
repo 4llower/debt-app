@@ -17,6 +17,56 @@ namespace DManager.DataSource
             {
                 Name = "Maks",
                 Money = 50
+            },
+            new Models.ComingModel()
+            {
+                Name = "Sergey",
+                Money = 100
+            },
+            new Models.ComingModel()
+            {
+                Name = "Maks",
+                Money = 50
+            },
+            new Models.ComingModel()
+            {
+                Name = "Sergey",
+                Money = 100
+            },
+            new Models.ComingModel()
+            {
+                Name = "Maks",
+                Money = 50
+            },
+                        new Models.ComingModel()
+            {
+                Name = "Sergey",
+                Money = 100
+            },
+            new Models.ComingModel()
+            {
+                Name = "Maks",
+                Money = 50
+            },
+            new Models.ComingModel()
+            {
+                Name = "Sergey",
+                Money = 100
+            },
+            new Models.ComingModel()
+            {
+                Name = "Maks",
+                Money = 50
+            },
+            new Models.ComingModel()
+            {
+                Name = "Sergey",
+                Money = 100
+            },
+            new Models.ComingModel()
+            {
+                Name = "Maks",
+                Money = 50
             }
         };
     }
