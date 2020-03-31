@@ -6,11 +6,16 @@ namespace DManager
 {
     public partial class App : Application
     {
+        [Obsolete]
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new DebtsViews());
+            MainPage = new NavigationPage(new DebtsViews())
+            {
+                BarBackgroundColor = Color.FromHex("#4A78D6"),
+                BarTextColor = Color.White
+            };
         }
 
         protected override void OnStart()
