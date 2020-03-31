@@ -7,18 +7,7 @@ namespace DManager.ViewModels
 {
     public class OutViewModel
     {
-        private ObservableCollection<Models.OutModel> outs;
-        public ObservableCollection<Models.OutModel> Outs
-        {
-            get
-            {
-                return outs;
-            }
-            set
-            {
-                outs = value;
-            }
-        }
+        public ObservableCollection<Models.OutModel> Outs { get; set; }
 
         public OutViewModel()
         {
@@ -27,7 +16,7 @@ namespace DManager.ViewModels
 
             DataSource.DataOut _context = new DataSource.DataOut();
 
-            foreach (var Out in _context.Outs)
+            foreach (Models.OutModel Out in _context.Outs)
             {
                 Outs.Add(Out);
             }

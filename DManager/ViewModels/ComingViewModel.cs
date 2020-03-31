@@ -7,18 +7,7 @@ namespace DManager.ViewModels
 {
     public class ComingViewModel
     {
-        private ObservableCollection<Models.ComingModel> comings;
-        public ObservableCollection<Models.ComingModel> Comings
-        {
-            get
-            {
-                return comings;
-            }
-            set
-            {
-                comings = value;
-            }
-        }
+        public ObservableCollection<Models.ComingModel> Comings { get; set; }
 
         public ComingViewModel()
         {
@@ -27,7 +16,7 @@ namespace DManager.ViewModels
 
             DataSource.DataComing _context = new DataSource.DataComing();
 
-            foreach (var Coming in _context.Comings)
+            foreach (Models.ComingModel Coming in _context.Comings)
             {
                 Comings.Add(Coming);
             }
