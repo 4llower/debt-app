@@ -10,7 +10,7 @@ namespace DManager
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new DebtsViews());
         }
 
         protected override void OnStart()
