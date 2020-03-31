@@ -5,12 +5,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="DManager.Outs"
-             Title="Outs">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="This is outs"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             Title ="Outs">
+    <ListView ItemsSource="{Binding Outs}"
+              HasUnevenRows="True"
+              BackgroundColor="#ecf0f1"
+              SeparatorVisibility="None"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+
+        <ListView.ItemTemplate>
+
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Margin="6,4,6,4"
+                                 BackgroundColor="White">
+                        <Label Text="{Binding Name}"
+                               Margin="8"
+                               FontAttributes="Bold"
+                               FontSize="Medium" />
+                        <Label Text="{Binding Money}"
+                               Margin="8,2,8,4"
+                               FontSize="Small" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

@@ -15,6 +15,7 @@ namespace DManager
         public Outs()
         {
             InitializeComponent();
+            BindingContext = new ViewModels.OutViewModel();
         }
     }
 }

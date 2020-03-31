@@ -15,6 +15,7 @@ namespace DManager
         public Comings()
         {
             InitializeComponent();
+            BindingContext = new ViewModels.ComingViewModel();
         }
     }
 }
