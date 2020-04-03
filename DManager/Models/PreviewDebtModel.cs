@@ -2,7 +2,7 @@
 {
     public class PreviewDebtModel
     {
-        public string name { set; get; }
-        public int debt_sum { set; get; }
+        public string Name { set; get; }
+        public int DebtSum { set; get; }
     }
 }

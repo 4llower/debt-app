@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SQLite;
+using System.IO;
 
 namespace DManager
 {
@@ -17,13 +19,13 @@ namespace DManager
         public DebtsViews()
         {
             InitializeComponent();
-
+           
             BarBackgroundColor = Color.FromHex("#4A78D6");
             BarTextColor = Color.White;
 
             ToolbarItem CreateDebt = new ToolbarItem
             {
-                Text = "help",
+                Text = "Debt",
                 Order = ToolbarItemOrder.Primary,
                 Priority = 0,
                 Icon = new FileImageSource

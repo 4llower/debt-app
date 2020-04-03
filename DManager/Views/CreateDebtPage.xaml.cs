@@ -16,5 +16,37 @@ namespace DManager.Views
         {
             InitializeComponent();
         }
+
+        private void DebtButton_Click(object sender, EventArgs e)
+        {
+  
+            if (string.IsNullOrEmpty(NameField.Text))
+            {
+                DisplayAlert("Error", "Name is empty, please verify all information.", "OK");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(ValueField.Text))
+            {
+                DisplayAlert("Error", "Sum is empty, please verify all information.", "OK");
+                return;
+            }
+
+            DataSource.DebtData Worker = new DataSource.DebtData();
+
+            int value = int.Parse(ValueField.Text);
+
+            if (styleSwitch.IsToggled) value = -value;
+
+            Models.DebtModel Item = new Models.DebtModel()
+            {
+                Name = NameField.Text,
+                DebtChange = value,
+                Description = !string.IsNullOrEmpty(DescriptionField.Text) ? DescriptionField.Text : ""
+            };
+
+            Worker.MakeChange(Item);
+            Navigation.PopAsync();
+        }
     }
 }

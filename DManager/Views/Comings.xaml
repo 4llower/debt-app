@@ -19,11 +19,11 @@
                 <ViewCell>
                     <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
-                        <Label Text="{Binding name}"
+                        <Label Text="{Binding Name}"
                                Margin="8"
                                FontAttributes="Bold"
                                FontSize="Medium" />
-                        <Label Text="{Binding debt_sum}"
+                        <Label Text="{Binding DebtSum}"
                                Margin="8,2,8,4"
                                FontSize="Small" />
                     </StackLayout>

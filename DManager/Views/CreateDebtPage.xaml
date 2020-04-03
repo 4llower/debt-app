@@ -6,16 +6,17 @@
              mc:Ignorable="d"
              x:Class="DManager.Views.CreateDebtPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="14,50,14,14" Spacing="70">
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="14,50,14,14" Spacing="50">
             <Label Text="Debt Creation" Font="Bold, 40"  HorizontalOptions="Center"></Label>
             <StackLayout Orientation="Horizontal"  HorizontalOptions="Center">
                 <Label Text="Coming" Font="Bold, 15"></Label>
                 <Switch x:Name ="styleSwitch" IsToggled="true"/>
                 <Label Text="Out" Font="Bold, 15"></Label>
             </StackLayout>
-            <Entry HorizontalOptions="Center" WidthRequest ="85" HeightRequest="40" MaxLength="8" FontSize="17" Placeholder="Sum(BYN)"/>
-            <Entry HorizontalOptions="Center" WidthRequest ="95" HeightRequest="40" FontSize="17" Placeholder="Description"/>
-            <Button HorizontalOptions="Center" Text="Create a Debt"/>
+            <Entry HorizontalTextAlignment="Center" Placeholder="Name" WidthRequest ="85" HeightRequest="40" MaxLength="8" FontSize="17" x:Name="NameField"/>
+            <Entry MaxLength="8" FontSize="17" Placeholder="Sum(BYN)" x:Name="ValueField" Keyboard="Numeric"/>
+            <Entry FontSize="17" Placeholder="Description" x:Name="DescriptionField"/>
+            <Button HorizontalOptions="Center" Text="Create a Debt" x:Name="DebtButton" Clicked="DebtButton_Click"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
