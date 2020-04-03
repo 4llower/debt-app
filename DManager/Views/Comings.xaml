@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="DManager.Comings"
              Title ="Comings">
-    <ListView ItemsSource="{Binding Comings}"
+    <ListView ItemsSource="{Binding PreviewList}"
               HasUnevenRows="True"
               BackgroundColor="#ecf0f1"
               SeparatorVisibility="None"
@@ -19,11 +19,11 @@
                 <ViewCell>
                     <StackLayout Margin="6,4,6,4"
                                  BackgroundColor="White">
-                        <Label Text="{Binding Name}"
+                        <Label Text="{Binding name}"
                                Margin="8"
                                FontAttributes="Bold"
                                FontSize="Medium" />
-                        <Label Text="{Binding Money}"
+                        <Label Text="{Binding debt_sum}"
                                Margin="8,2,8,4"
                                FontSize="Small" />
                     </StackLayout>
