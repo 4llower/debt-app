@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DManager.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace DManager
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new DebtsViews())
+            MainPage = new NavigationPage(new StartPage())
             {
                 BarBackgroundColor = Color.FromHex("#4A78D6"),
                 BarTextColor = Color.White

@@ -17,7 +17,7 @@ namespace DManager.Views
             InitializeComponent();
         }
 
-        private void DebtButton_Click(object sender, EventArgs e)
+        private void DebtButton_Clicked(object sender, EventArgs e)
         {
   
             if (string.IsNullOrEmpty(NameField.Text))
@@ -46,7 +46,10 @@ namespace DManager.Views
             };
 
             Worker.MakeChange(Item);
-            Navigation.PopAsync();
+
+            DisplayAlert("Success", "Your debt has been successfully created", "OK");
+
+            Navigation.PopToRootAsync();
         }
     }
 }
