@@ -20,10 +20,12 @@ namespace DManager.DataSource
         public List<Models.DebtModel> GetAllChanges()
         {
             List<Models.DebtModel> Changes = new List<Models.DebtModel>();
+
             foreach (Models.DebtModel Change in db.Table<Models.DebtModel>())
             {
                 Changes.Add(Change);
             }
+
             return Changes;
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DManager.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,12 @@ namespace DManager
         {
             InitializeComponent();
             BindingContext = new ViewModels.DebtViewModel(false);
+        }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Models.PreviewDebtModel temp = (Models.PreviewDebtModel)e.SelectedItem;
+            Navigation.PushAsync(new DebtUserPage(temp));
         }
     }
 }

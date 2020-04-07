@@ -11,7 +11,8 @@
               BackgroundColor="#ecf0f1"
               SeparatorVisibility="None"
               HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand">
+              VerticalOptions="FillAndExpand"
+              ItemSelected ="ListView_ItemSelected">
 
         <ListView.ItemTemplate>
 
