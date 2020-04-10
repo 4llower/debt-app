@@ -16,7 +16,7 @@ namespace DManager.Views
     {
         private DebtModel CurrentSelectItem;
         private string UserName;
-        private int CurrentDebt;
+        private double CurrentDebt;
         private DebtData Worker;
         public DebtUserPage(Models.PreviewDebtModel DebtInfo)
         {

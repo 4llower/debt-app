@@ -20,7 +20,7 @@ namespace DManager.ViewModels
 
             DataSource.DebtData _context = new DataSource.DebtData();
 
-            Dictionary<string, int> Assume = new Dictionary<string, int>();
+            Dictionary<string, double> Assume = new Dictionary<string, double>();
 
             foreach (Models.DebtModel Change in _context.GetAllChanges())
             {
@@ -31,7 +31,7 @@ namespace DManager.ViewModels
                 }
             }
 
-            foreach (KeyValuePair<string, int> PreviewValue in Assume)
+            foreach (KeyValuePair<string, double> PreviewValue in Assume)
             {
                 if ((isComing == true && PreviewValue.Value > 0) || (isComing == false && PreviewValue.Value < 0))
                 {
