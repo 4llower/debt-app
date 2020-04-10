@@ -16,6 +16,11 @@ namespace DManager
         public Comings()
         {
             InitializeComponent();
+            Refresh();
+        }
+
+        public void Refresh()
+        {
             BindingContext = new ViewModels.DebtViewModel(true);
         }
 

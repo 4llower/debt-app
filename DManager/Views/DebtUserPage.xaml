@@ -5,31 +5,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="DManager.Views.DebtUserPage">
-    <ListView ItemsSource="{Binding ChangeList}"
-              HasUnevenRows="True"
-              BackgroundColor="#ecf0f1"
-              SeparatorVisibility="None"
-              HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand"
-              SelectionMode="None">
+    <StackLayout>
+        <Button x:Name="DeleteDebtButton" Clicked="DeleteDebtButton_Clicked" Text="Close the debt"></Button>
+        <ListView ItemsSource="{Binding ChangeList}"
+                  HasUnevenRows="True"
+                  BackgroundColor="#ecf0f1"
+                  SeparatorVisibility="None"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  SelectionMode="None">
 
-        <ListView.ItemTemplate>
+            <ListView.ItemTemplate>
 
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout Margin="6,4,6,4"
-                                 BackgroundColor="White">
-                        <Label Text="{Binding DebtChange}"
-                               Margin="8"
-                               FontAttributes="Bold"
-                               FontSize="Medium" />
-                        <Label Text="{Binding Description}"
-                               Margin="8,2,8,4"
-                               FontSize="Small" />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="6,4,6,4"
+                                     BackgroundColor="White">
+                            <Label Text="{Binding DebtChange}"
+                                   Margin="8"
+                                   FontAttributes="Bold"
+                                   FontSize="Medium" />
+                            <Label Text="{Binding Description}"
+                                   Margin="8,2,8,4"
+                                   FontSize="Small" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
 
-        </ListView.ItemTemplate>
-    </ListView>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

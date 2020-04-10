@@ -12,7 +12,7 @@ namespace DManager
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new StartPage())
+            MainPage = new NavigationPage(new DebtsViews())
             {
                 BarBackgroundColor = Color.FromHex("#4A78D6"),
                 BarTextColor = Color.White

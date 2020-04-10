@@ -47,9 +47,9 @@ namespace DManager.Views
 
             Worker.MakeChange(Item);
 
-            DisplayAlert("Success", "Your debt has been successfully created", "OK");
+            DisplayAlert("Success", "Your debt has been successfully created.", "OK");
 
-            Navigation.PopToRootAsync();
+            Navigation.PopAsync();
         }
     }
 }

@@ -16,13 +16,18 @@ namespace DManager
         public Outs()
         {
             InitializeComponent();
-            BindingContext = new ViewModels.DebtViewModel(false);
+            Refresh();
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             Models.PreviewDebtModel temp = (Models.PreviewDebtModel)e.Item;
             Navigation.PushAsync(new DebtUserPage(temp));
+        }
+
+        public void Refresh()
+        {
+            BindingContext = new ViewModels.DebtViewModel(false);
         }
     }
 }
