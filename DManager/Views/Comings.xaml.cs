@@ -19,9 +19,9 @@ namespace DManager
             BindingContext = new ViewModels.DebtViewModel(true);
         }
 
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Models.PreviewDebtModel temp = (Models.PreviewDebtModel)e.SelectedItem;
+            Models.PreviewDebtModel temp = (Models.PreviewDebtModel)e.Item;
             Navigation.PushAsync(new DebtUserPage(temp));
         }
     }

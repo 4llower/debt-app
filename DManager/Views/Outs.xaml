@@ -12,7 +12,8 @@
               SeparatorVisibility="None"
               HorizontalOptions="FillAndExpand"
               VerticalOptions="FillAndExpand"
-              ItemSelected="ListView_ItemSelected">
+              ItemTapped="ListView_ItemTapped"
+              SelectionMode="None">
 
         <ListView.ItemTemplate>
 

@@ -10,7 +10,6 @@ namespace DManager.ViewModels
     {
         public ObservableCollection<Models.PreviewDebtModel> PreviewList { get; set; }
 
-
         //True - Coming
         //False - Out
 

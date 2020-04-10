@@ -36,6 +36,7 @@ namespace DManager
 
             CreateDebt.Clicked += async (s, e) =>
             {
+
                 await Navigation.PushAsync(new CreateDebtPage());
             };
 

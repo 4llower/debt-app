@@ -16,10 +16,11 @@ namespace DManager.Views
         {
             InitializeComponent();
         }
-
         private void StartButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new DebtsViews());
+            DebtsViews MainView = new DebtsViews();
+            NavigationPage.SetHasBackButton(MainView, false);
+            Navigation.PushAsync(MainView);
         }
     }
 }

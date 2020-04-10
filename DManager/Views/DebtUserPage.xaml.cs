@@ -12,10 +12,11 @@ namespace DManager.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DebtUserPage : ContentPage
     {
-        public DebtUserPage(Models.PreviewDebtModel s)
+        public DebtUserPage(Models.PreviewDebtModel DebtInfo)
         {
             InitializeComponent();
-            TextLabel.Text = s.Name;
+            Title = DebtInfo.Name + " = " + DebtInfo.DebtSum.ToString();
+            BindingContext = new ViewModels.ChangeViewModel(DebtInfo.Name);
         }
     }
 }
