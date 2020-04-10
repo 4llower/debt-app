@@ -34,7 +34,7 @@ namespace DManager.Views
 
             DataSource.DebtData Worker = new DataSource.DebtData();
 
-            int value = int.Parse(ValueField.Text);
+            double value = double.Parse(ValueField.Text);
 
             if (styleSwitch.IsToggled) value = -value;
 
