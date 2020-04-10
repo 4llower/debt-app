@@ -1,4 +1,5 @@
 ﻿using DManager.DataSource;
+using DManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,40 @@ namespace DManager.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DebtUserPage : ContentPage
     {
-
-        string UserName;
+        private DebtModel CurrentSelectItem;
+        private string UserName;
+        private int CurrentDebt;
+        private DebtData Worker;
         public DebtUserPage(Models.PreviewDebtModel DebtInfo)
         {
             InitializeComponent();
-            Title = DebtInfo.Name + " = " + DebtInfo.DebtSum.ToString();
             UserName = DebtInfo.Name;
-            BindingContext = new ViewModels.ChangeViewModel(DebtInfo.Name);
+            CurrentDebt = DebtInfo.DebtSum;
+            Worker = new DebtData();
+            CurrentSelectItem = new DebtModel();
+            Refresh();
+
+            //REFRESH TOOL ********
+
+            ToolbarItem RefreshButton = new ToolbarItem
+            {
+                Text = "Refresh",
+                Order = ToolbarItemOrder.Primary,
+                Priority = 0,
+                Icon = new FileImageSource
+                {
+                    File = "iconRefresh.png"
+                }
+            };
+
+            RefreshButton.Clicked += async (s, e) =>
+            {
+                Refresh();
+            };
+
+            ToolbarItems.Add(RefreshButton);
+
+            //********
         }
 
         private void DeleteDebtButton_Clicked(object sender, EventArgs e)
@@ -29,6 +56,36 @@ namespace DManager.Views
             Worker.EraseByName(UserName);
             DisplayAlert("Success", "Your debt has been successfully deleted.", "OK");
             Navigation.PopAsync();
+        }
+
+        private bool IsEmpty(DebtModel Value)
+        {
+            return String.IsNullOrEmpty(Value.Name);
+        }
+
+        void Refresh()
+        {
+            BindingContext = new ViewModels.ChangeViewModel(UserName);
+            Title = UserName + " = " + CurrentDebt.ToString();
+        }
+
+        private void DeleteSelectButton_Clicked(object sender, EventArgs e)
+        {
+            if (IsEmpty(CurrentSelectItem))
+            {
+                DisplayAlert("Error", "You are not select the debt.", "OK");
+                return;
+            }
+
+            Worker.EraseByFields(CurrentSelectItem);
+            CurrentSelectItem.Name = "";
+            CurrentDebt -= CurrentSelectItem.DebtChange;
+            Refresh();
+        }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            CurrentSelectItem = (DebtModel)e.SelectedItem;
         }
     }
 }

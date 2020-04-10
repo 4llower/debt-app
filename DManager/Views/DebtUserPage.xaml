@@ -6,14 +6,15 @@
              mc:Ignorable="d"
              x:Class="DManager.Views.DebtUserPage">
     <StackLayout>
-        <Button x:Name="DeleteDebtButton" Clicked="DeleteDebtButton_Clicked" Text="Close the debt"></Button>
+        <Button x:Name="DeleteDebtButton" Clicked="DeleteDebtButton_Clicked" Text="Close all debts"></Button>
+        <Button x:Name="DeleteSelectButton" Clicked="DeleteSelectButton_Clicked"  Text="Select and close selected debt"></Button>
         <ListView ItemsSource="{Binding ChangeList}"
                   HasUnevenRows="True"
                   BackgroundColor="#ecf0f1"
                   SeparatorVisibility="None"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="FillAndExpand"
-                  SelectionMode="None">
+                  ItemSelected="ListView_ItemSelected">
 
             <ListView.ItemTemplate>
 
