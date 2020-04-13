@@ -12,11 +12,14 @@ namespace DManager.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateDebtPage : ContentPage
     {
-        public CreateDebtPage(string currentPage)
+
+        DebtsViews currentMainView;
+        public CreateDebtPage(string currentPage, DebtsViews currentDebtViews)
         {
             InitializeComponent();
             if (currentPage == "Comings") styleSwitch.IsToggled = false;
             else styleSwitch.IsToggled = true;
+            currentMainView = currentDebtViews;
         }
 
         private void DebtButton_Clicked(object sender, EventArgs e)
@@ -59,6 +62,7 @@ namespace DManager.Views
             Worker.MakeChange(Item);
 
             DisplayAlert("Success", "Your debt has been successfully created.", "OK");
+            currentMainView.Refresh();
 
             Navigation.PopAsync();
         }

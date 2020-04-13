@@ -26,8 +26,9 @@ namespace DManager.Views
             Worker = new DebtData();
             CurrentSelectItem = new DebtModel();
             Refresh();
-
-            //REFRESH TOOL ********
+            
+            /*
+                REFRESH TOOL
 
             ToolbarItem RefreshButton = new ToolbarItem
             {
@@ -47,7 +48,7 @@ namespace DManager.Views
 
             ToolbarItems.Add(RefreshButton);
 
-            //********
+            */
         }
 
         private void DeleteDebtButton_Clicked(object sender, EventArgs e)
