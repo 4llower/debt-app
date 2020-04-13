@@ -15,6 +15,7 @@ namespace DManager
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DebtsViews : TabbedPage
     {
+        private string currentPageName;
         public DebtsViews()
         {
             InitializeComponent();
@@ -42,7 +43,7 @@ namespace DManager
 
             CreateDebt.Clicked += async (s, e) =>
             {
-                await Navigation.PushAsync(new CreateDebtPage());
+                await Navigation.PushAsync(new CreateDebtPage(currentPageName));
             };
 
             ToolbarItems.Add(CreateDebt);
@@ -73,6 +74,11 @@ namespace DManager
             //********
         }
 
-        
+        protected override void OnCurrentPageChanged()
+        {
+            currentPageName = CurrentPage.Title;
+        }
+
+
     }
 }

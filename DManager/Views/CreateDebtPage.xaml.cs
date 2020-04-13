@@ -12,9 +12,11 @@ namespace DManager.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateDebtPage : ContentPage
     {
-        public CreateDebtPage()
+        public CreateDebtPage(string currentPage)
         {
             InitializeComponent();
+            if (currentPage == "Comings") styleSwitch.IsToggled = false;
+            else styleSwitch.IsToggled = true;
         }
 
         private void DebtButton_Clicked(object sender, EventArgs e)
@@ -33,16 +35,25 @@ namespace DManager.Views
             }
 
             DataSource.DebtData Worker = new DataSource.DebtData();
+            double value = 0; // number of byn in debt
 
-            double value = double.Parse(ValueField.Text);
+            try
+            {
+                value = double.Parse(ValueField.Text);
+            } 
+            catch (Exception ex)
+            {
+                DisplayAlert("Error", "Please enter the correct number", "OK");
+                return;
+            }
 
             if (styleSwitch.IsToggled) value = -value;
 
             Models.DebtModel Item = new Models.DebtModel()
             {
-                Name = NameField.Text,
+                Name = Char.ToUpper(NameField.Text[0]) + NameField.Text.Substring(1),
                 DebtChange = value,
-                Description = !string.IsNullOrEmpty(DescriptionField.Text) ? DescriptionField.Text : ""
+                Description = !string.IsNullOrEmpty(DescriptionField.Text) ? Char.ToUpper(DescriptionField.Text[0]) + DescriptionField.Text.Substring(1) : ""
             };
 
             Worker.MakeChange(Item);

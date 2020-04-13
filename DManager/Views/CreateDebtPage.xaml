@@ -14,7 +14,7 @@
                 <Label Text="Out" Font="Bold, 15"></Label>
             </StackLayout>
             <Entry HorizontalTextAlignment="Center" Placeholder="Name" WidthRequest ="85" HeightRequest="40" FontSize="17" x:Name="NameField"/>
-            <Entry MaxLength="8" FontSize="17" Placeholder="Sum(BYN)" x:Name="ValueField" Keyboard="Numeric"/>
+            <Entry MaxLength="8" FontSize="17" Placeholder="Sum(BYN)" x:Name="ValueField"/>
             <Entry FontSize="17" Placeholder="Description" x:Name="DescriptionField"/>
             <Button HorizontalOptions="Center" Text="Create a Debt" x:Name="DebtButton" Clicked="DebtButton_Clicked"/>
         </StackLayout>
