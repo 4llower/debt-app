@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using DManager.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,11 @@ namespace DManager.DataSource
             }
 
             return Changes;
+        }
+
+        public int GetNumberChanges(string UserName)
+        {
+            return db.Table<DebtModel>().Count(Change => Change.Name == UserName);
         }
 
         public void MakeChange(Models.DebtModel Debt)

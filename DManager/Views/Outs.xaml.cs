@@ -22,7 +22,7 @@ namespace DManager
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             Models.PreviewDebtModel temp = (Models.PreviewDebtModel)e.Item;
-            Navigation.PushAsync(new DebtUserPage(temp));
+            Navigation.PushAsync(new DebtUserPage(temp, this));
         }
 
         public void Refresh()
