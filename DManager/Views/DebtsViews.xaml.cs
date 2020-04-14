@@ -15,6 +15,9 @@ namespace DManager
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DebtsViews : TabbedPage
     {
+        private string currentPageName;
+
+        [Obsolete]
         public DebtsViews()
         {
             InitializeComponent();
@@ -42,14 +45,13 @@ namespace DManager
 
             CreateDebt.Clicked += async (s, e) =>
             {
-                await Navigation.PushAsync(new CreateDebtPage());
+                await Navigation.PushAsync(new CreateDebtPage(currentPageName));
             };
 
             ToolbarItems.Add(CreateDebt);
 
-            // ********
-
-            //REFRESH TOOL ********
+            /*
+                   REFRESH TOOL 
 
             ToolbarItem RefreshButton = new ToolbarItem
             {
@@ -64,15 +66,23 @@ namespace DManager
 
             RefreshButton.Clicked += async (s, e) =>
             {
-                ((Comings)Children.ElementAt(0)).Refresh();
-                ((Outs)Children.ElementAt(1)).Refresh();
+                Refresh();
             };
 
-            ToolbarItems.Add(RefreshButton);
-
-            //********
+            ToolbarItems.Add(RefreshButton); 
+            
+            */
         }
 
-        
+        protected override void OnCurrentPageChanged()
+        {
+            currentPageName = CurrentPage.Title;
+        }
+
+        public void Refresh()
+        {
+            ((Comings)Children.ElementAt(0)).Refresh();
+            ((Outs)Children.ElementAt(1)).Refresh();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using DManager.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ namespace DManager.ViewModels
 {
     public class DebtViewModel
     {
-        public ObservableCollection<Models.PreviewDebtModel> PreviewList { get; set; }
+        public ObservableCollection<PreviewDebtModel> PreviewList { get; set; }
 
         //True - Coming
         //False - Out
@@ -16,13 +17,13 @@ namespace DManager.ViewModels
         public DebtViewModel(bool isComing)
         {
 
-            PreviewList = new ObservableCollection<Models.PreviewDebtModel>();
+            PreviewList = new ObservableCollection<PreviewDebtModel>();
 
             DataSource.DebtData _context = new DataSource.DebtData();
 
             Dictionary<string, double> Assume = new Dictionary<string, double>();
 
-            foreach (Models.DebtModel Change in _context.GetAllChanges())
+            foreach (DebtModel Change in _context.GetAllChanges())
             {
                 if (!Assume.ContainsKey(Change.Name)) Assume.Add(Change.Name, Change.DebtChange);
                 else
@@ -35,7 +36,7 @@ namespace DManager.ViewModels
             {
                 if ((isComing == true && PreviewValue.Value > 0) || (isComing == false && PreviewValue.Value < 0))
                 {
-                    PreviewList.Add(new Models.PreviewDebtModel() { Name = PreviewValue.Key, DebtSum = PreviewValue.Value });
+                    PreviewList.Add(new PreviewDebtModel() { Name = PreviewValue.Key, DebtSum = PreviewValue.Value });
                 }
             }
         }

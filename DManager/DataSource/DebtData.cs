@@ -1,7 +1,9 @@
-﻿using SQLite;
+﻿using DManager.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace DManager.DataSource
@@ -14,34 +16,86 @@ namespace DManager.DataSource
         public DebtData()
         {
             db = new SQLiteConnection(dbpath);
-            db.CreateTable<Models.DebtModel>();
+            db.CreateTable<DebtModel>();
         }
 
-        public List<Models.DebtModel> GetAllChanges()
-        {
-            List<Models.DebtModel> Changes = new List<Models.DebtModel>();
-
-            foreach (Models.DebtModel Change in db.Table<Models.DebtModel>())
+        public List<DebtModel> GetAllChanges()
+        { 
+            List <DebtModel> Changes = db.Table<DebtModel>().ToList();
+            Changes.Sort(delegate (DebtModel x, DebtModel y)
             {
-                Changes.Add(Change);
-            }
-
+                if (x.DebtChange == y.DebtChange) return 0;
+                return x.DebtChange > y.DebtChange ? 1 : -1;
+            });
             return Changes;
         }
 
-        public void MakeChange(Models.DebtModel Debt)
+        public int GetNumberChanges(string UserName)
         {
-            db.Insert(Debt);
+            return db.Table<DebtModel>().Count(Change => Change.Name == UserName);
+        }
+
+        public void MakeChange(DebtModel Debt)
+        {
+            List<DebtModel> ChangesByName = db.Table<DebtModel>().ToList().FindAll(Change => Change.Name == Debt.Name);
+
+            if (ChangesByName.Count(Change => Change.DebtChange > 0) != 0)
+            {
+                if (Debt.DebtChange > 0)
+                {
+                    db.Insert(Debt);
+                    return;
+                }
+            } else
+            {
+                if (Debt.DebtChange < 0)
+                {
+                    db.Insert(Debt);
+                    return;
+                }
+            }
+
+            ChangesByName.Sort(delegate (DebtModel x, DebtModel y)
+            {
+                if (x.DebtChange == y.DebtChange) return 0;
+                return Math.Abs(x.DebtChange) > Math.Abs(y.DebtChange) ? 1 : -1;
+            });
+
+
+            int sign = (Debt.DebtChange > 0 ? 1 : -1);
+            bool isMore = false;
+            Debt.DebtChange = Math.Abs(Debt.DebtChange);
+            foreach (DebtModel Change in ChangesByName)
+            {
+                if (Debt.DebtChange >= Math.Abs(Change.DebtChange))
+                {
+                    Debt.DebtChange -= Change.DebtChange;
+                    EraseByFields(Change);
+                } else
+                {
+                    EraseByFields(Change);
+                    Change.DebtChange += sign * Debt.DebtChange;
+                    if (Change.DebtChange != 0) db.Insert(Change);
+                    isMore = true;
+                    break;
+                }
+            }
+
+            if (isMore == false)
+            {
+                Debt.DebtChange *= sign;
+                db.Insert(Debt);
+            }
         }
 
         public void EraseByName(string Name)
         {
-            db.Table<Models.DebtModel>().Delete(Change => Change.Name == Name);
+            db.Table<DebtModel>().Delete(Change => Change.Name == Name);
         }
 
-        public void EraseByFields(Models.DebtModel Debt)
+        public void EraseByFields(DebtModel Debt)
         {
-            db.Table<Models.DebtModel>().Delete(Change => (Change.Name == Debt.Name && Change.DebtChange == Debt.DebtChange && Change.Description == Debt.Description));
+            db.Table<DebtModel>().Delete(Change => (Change.Name == Debt.Name && Change.DebtChange == Debt.DebtChange && Change.Description == Debt.Description));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DManager.Views;
+﻿using DManager.Models;
+using DManager.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace DManager
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Models.PreviewDebtModel temp = (Models.PreviewDebtModel)e.Item;
+            PreviewDebtModel temp = (PreviewDebtModel)e.Item;
             Navigation.PushAsync(new DebtUserPage(temp));
         }
     }

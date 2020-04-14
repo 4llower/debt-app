@@ -1,5 +1,6 @@
 ﻿using DManager.DataSource;
 using DManager.Models;
+using DManager.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DManager.Views
         private string UserName;
         private double CurrentDebt;
         private DebtData Worker;
-        public DebtUserPage(Models.PreviewDebtModel DebtInfo)
+        public DebtUserPage(PreviewDebtModel DebtInfo)
         {
             InitializeComponent();
             UserName = DebtInfo.Name;
@@ -26,8 +27,9 @@ namespace DManager.Views
             Worker = new DebtData();
             CurrentSelectItem = new DebtModel();
             Refresh();
-
-            //REFRESH TOOL ********
+            
+            /*
+                REFRESH TOOL
 
             ToolbarItem RefreshButton = new ToolbarItem
             {
@@ -47,14 +49,18 @@ namespace DManager.Views
 
             ToolbarItems.Add(RefreshButton);
 
-            //********
+            */
         }
 
         private void DeleteDebtButton_Clicked(object sender, EventArgs e)
         {
             DebtData Worker = new DebtData();
             Worker.EraseByName(UserName);
+            
             DisplayAlert("Success", "Your debt has been successfully deleted.", "OK");
+
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
+
             Navigation.PopAsync();
         }
 
@@ -65,7 +71,7 @@ namespace DManager.Views
 
         void Refresh()
         {
-            BindingContext = new ViewModels.ChangeViewModel(UserName);
+            BindingContext = new ChangeViewModel(UserName);
             Title = UserName + " = " + CurrentDebt.ToString();
         }
 
@@ -79,8 +85,13 @@ namespace DManager.Views
 
             Worker.EraseByFields(CurrentSelectItem);
             CurrentSelectItem.Name = "";
+
             CurrentDebt -= CurrentSelectItem.DebtChange;
             Refresh();
+
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
+
+            if (Worker.GetNumberChanges(CurrentSelectItem.Name) == 0) Navigation.PopAsync();
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
