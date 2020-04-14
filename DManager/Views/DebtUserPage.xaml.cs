@@ -18,14 +18,12 @@ namespace DManager.Views
         private string UserName;
         private double CurrentDebt;
         private DebtData Worker;
-        private ContentPage currentView;
-        public DebtUserPage(Models.PreviewDebtModel DebtInfo, ContentPage currentPage)
+        public DebtUserPage(Models.PreviewDebtModel DebtInfo)
         {
             InitializeComponent();
             UserName = DebtInfo.Name;
             CurrentDebt = DebtInfo.DebtSum;
             Worker = new DebtData();
-            currentView = currentPage;
             CurrentSelectItem = new DebtModel();
             Refresh();
             
@@ -59,15 +57,8 @@ namespace DManager.Views
             Worker.EraseByName(UserName);
             
             DisplayAlert("Success", "Your debt has been successfully deleted.", "OK");
-            
-            try
-            {
-                ((Comings)currentView).Refresh();
-            }
-            catch (Exception ex)
-            {
-                ((Outs)currentView).Refresh();
-            }
+
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
 
             Navigation.PopAsync();
         }
@@ -97,14 +88,7 @@ namespace DManager.Views
             CurrentDebt -= CurrentSelectItem.DebtChange;
             Refresh();
 
-            try
-            {
-                ((Comings)currentView).Refresh();
-            }
-            catch (Exception ex)
-            {
-                ((Outs)currentView).Refresh();
-            }
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
 
             if (Worker.GetNumberChanges(CurrentSelectItem.Name) == 0)
             {

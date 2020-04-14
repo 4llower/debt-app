@@ -1,4 +1,5 @@
 ﻿using DManager.DataSource;
+using DManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,16 +9,11 @@ namespace DManager.ViewModels
 {
     public class ChangeViewModel
     {
-        public ObservableCollection<Models.DebtModel> ChangeList { get; set; }
+        public ObservableCollection<DebtModel> ChangeList { get; set; }
         public ChangeViewModel(string Name)
         {
-
             ChangeList = new ObservableCollection<Models.DebtModel>();
-            DebtData _context = new DebtData();
-            foreach (Models.DebtModel Change in _context.GetAllChanges())
-            {
-                if (Change.Name == Name) ChangeList.Add(Change);
-            }
+            foreach (DebtModel Change in (new DebtData()).GetAllChanges().FindAll(Change => Change.Name == Name)) ChangeList.Add(Change);  
         }
     }
 }

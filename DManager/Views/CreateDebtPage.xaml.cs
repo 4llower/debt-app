@@ -12,14 +12,10 @@ namespace DManager.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateDebtPage : ContentPage
     {
-
-        DebtsViews currentMainView;
-        public CreateDebtPage(string currentPage, DebtsViews currentDebtViews)
+        public CreateDebtPage(string currentPage)
         {
             InitializeComponent();
-            if (currentPage == "Comings") styleSwitch.IsToggled = false;
-            else styleSwitch.IsToggled = true;
-            currentMainView = currentDebtViews;
+            styleSwitch.IsToggled = (currentPage == "Comings") ? false : true;
         }
 
         private void DebtButton_Clicked(object sender, EventArgs e)
@@ -38,13 +34,13 @@ namespace DManager.Views
             }
 
             DataSource.DebtData Worker = new DataSource.DebtData();
-            double value = 0; // number of byn in debt
+            double value;
 
             try
             {
                 value = double.Parse(ValueField.Text);
             } 
-            catch (Exception ex)
+            catch (Exception)
             {
                 DisplayAlert("Error", "Please enter the correct number", "OK");
                 return;
@@ -62,8 +58,7 @@ namespace DManager.Views
             Worker.MakeChange(Item);
 
             DisplayAlert("Success", "Your debt has been successfully created.", "OK");
-            currentMainView.Refresh();
-
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
             Navigation.PopAsync();
         }
     }

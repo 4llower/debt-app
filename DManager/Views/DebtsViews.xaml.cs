@@ -16,6 +16,8 @@ namespace DManager
     public partial class DebtsViews : TabbedPage
     {
         private string currentPageName;
+
+        [Obsolete]
         public DebtsViews()
         {
             InitializeComponent();
@@ -43,7 +45,7 @@ namespace DManager
 
             CreateDebt.Clicked += async (s, e) =>
             {
-                await Navigation.PushAsync(new CreateDebtPage(currentPageName, this));
+                await Navigation.PushAsync(new CreateDebtPage(currentPageName));
             };
 
             ToolbarItems.Add(CreateDebt);
@@ -82,7 +84,5 @@ namespace DManager
             ((Comings)Children.ElementAt(0)).Refresh();
             ((Outs)Children.ElementAt(1)).Refresh();
         }
-
-
     }
 }
