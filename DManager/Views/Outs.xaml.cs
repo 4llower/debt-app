@@ -24,7 +24,7 @@ namespace DManager
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             PreviewDebtModel temp = (PreviewDebtModel)e.Item;
-            Navigation.PushAsync(new DebtUserPage(temp);
+            Navigation.PushAsync(new DebtUserPage(temp));
         }
 
         public void Refresh()
