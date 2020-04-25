@@ -18,43 +18,38 @@ namespace DManager.Views
         private DebtModel CurrentSelectItem;
         private string UserName;
         private double CurrentDebt;
-        private DebtData Worker;
+        private DebtController Worker;
         public DebtUserPage(PreviewDebtModel DebtInfo)
         {
             InitializeComponent();
             UserName = DebtInfo.Name;
             CurrentDebt = DebtInfo.DebtSum;
-            Worker = new DebtData();
+            Worker = new DebtController();
             CurrentSelectItem = new DebtModel();
             Refresh();
-            
-            /*
-                REFRESH TOOL
 
-            ToolbarItem RefreshButton = new ToolbarItem
+            ToolbarItem AddDebtButton = new ToolbarItem
             {
-                Text = "Refresh",
+                Text = "Add Debt",
                 Order = ToolbarItemOrder.Primary,
                 Priority = 0,
                 Icon = new FileImageSource
                 {
-                    File = "iconRefresh.png"
+                    File = "iconAdd.png"
                 }
             };
 
-            RefreshButton.Clicked += async (s, e) =>
+            AddDebtButton.Clicked += (s, e) =>
             {
-                Refresh();
+                Navigation.PushAsync(new CreateDebtPage("Comings", DebtInfo.Name));
             };
 
-            ToolbarItems.Add(RefreshButton);
-
-            */
+            ToolbarItems.Add(AddDebtButton);
         }
 
         private void DeleteDebtButton_Clicked(object sender, EventArgs e)
         {
-            DebtData Worker = new DebtData();
+            DebtController Worker = new DebtController();
             Worker.EraseByName(UserName);
             
             DisplayAlert("Success", "Your debt has been successfully deleted.", "OK");

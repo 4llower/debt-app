@@ -45,7 +45,7 @@ namespace DManager
 
             CreateDebt.Clicked += async (s, e) =>
             {
-                await Navigation.PushAsync(new CreateDebtPage(currentPageName));
+                await Navigation.PushAsync(new CreateDebtPage(currentPageName, ""));
             };
 
             ToolbarItems.Add(CreateDebt);

@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="DManager.Views.CreateDebtPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="14,50,14,14" Spacing="50">
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="14,50,14,14" Spacing ="20">
             <Label Text="Debt Creation" Font="Bold, 40"  HorizontalOptions="Center"></Label>
             <StackLayout Orientation="Horizontal"  HorizontalOptions="Center">
                 <Label Text="Coming" Font="Bold, 15"></Label>

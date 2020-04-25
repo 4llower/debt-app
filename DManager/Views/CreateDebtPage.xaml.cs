@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DManager.DataSource;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +8,16 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace DManager.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateDebtPage : ContentPage
     {
-        public CreateDebtPage(string currentPage)
+        public CreateDebtPage(string currentPage, string Name)
         {
             InitializeComponent();
+            NameField.Text = Name;
             styleSwitch.IsToggled = (currentPage == "Comings") ? false : true;
         }
 
@@ -33,14 +36,9 @@ namespace DManager.Views
                 return;
             }
 
-            DataSource.DebtData Worker = new DataSource.DebtData();
-            double value;
+            var Worker = new DebtController();
 
-            try
-            {
-                value = double.Parse(ValueField.Text);
-            } 
-            catch (Exception)
+            if (double.TryParse(ValueField.Text, out double value) == false)
             {
                 DisplayAlert("Error", "Please enter the correct number", "OK");
                 return;

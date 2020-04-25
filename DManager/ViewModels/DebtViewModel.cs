@@ -19,7 +19,7 @@ namespace DManager.ViewModels
 
             PreviewList = new ObservableCollection<PreviewDebtModel>();
 
-            DataSource.DebtData _context = new DataSource.DebtData();
+            DataSource.DebtController _context = new DataSource.DebtController();
 
             Dictionary<string, double> Assume = new Dictionary<string, double>();
 
