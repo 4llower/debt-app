@@ -45,6 +45,24 @@ namespace DManager.Views
             };
 
             ToolbarItems.Add(AddDebtButton);
+
+            ToolbarItem RefreshButton = new ToolbarItem
+            {
+                Text = "Refresh",
+                Order = ToolbarItemOrder.Primary,
+                Priority = 0,
+                Icon = new FileImageSource
+                {
+                    File = "iconRefresh.png"
+                }
+            };
+
+            RefreshButton.Clicked +=  (s, e) =>
+            {
+                Refresh();
+            };
+
+            ToolbarItems.Add(RefreshButton);
         }
 
         private void DeleteDebtButton_Clicked(object sender, EventArgs e)
