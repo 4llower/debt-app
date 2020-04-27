@@ -8,19 +8,14 @@ using System.Text;
 
 namespace DManager.DataSource
 {
-    public class DebtController
+    public static class DebtController
     {
-        string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DebtDatabase.db");
-        SQLiteConnection db;
+        static string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DebtDatabase.db");
+        static SQLiteConnection db = new SQLiteConnection(dbpath);
 
-        public DebtController()
+        static public List<DebtModel> getAllChanges()
         {
-            db = new SQLiteConnection(dbpath);
             db.CreateTable<DebtModel>();
-        }
-
-        public List<DebtModel> GetAllChanges()
-        { 
             List <DebtModel> Changes = db.Table<DebtModel>().ToList();
             Changes.Sort(delegate (DebtModel x, DebtModel y)
             {
@@ -30,12 +25,12 @@ namespace DManager.DataSource
             return Changes;
         }
 
-        public int GetNumberChanges(string UserName)
+        static public int getNumberChanges(string UserName)
         {
             return db.Table<DebtModel>().Count(Change => Change.Name == UserName);
         }
 
-        public void MakeChange(DebtModel Debt)
+        static public void createChange(DebtModel Debt)
         {
             List<DebtModel> ChangesByName = db.Table<DebtModel>().ToList().FindAll(Change => Change.Name == Debt.Name);
 
@@ -46,7 +41,8 @@ namespace DManager.DataSource
                     db.Insert(Debt);
                     return;
                 }
-            } else
+            } 
+            else
             {
                 if (Debt.DebtChange < 0)
                 {
@@ -65,15 +61,17 @@ namespace DManager.DataSource
             int sign = (Debt.DebtChange > 0 ? 1 : -1);
             bool isMore = false;
             Debt.DebtChange = Math.Abs(Debt.DebtChange);
+
             foreach (DebtModel Change in ChangesByName)
             {
                 if (Debt.DebtChange >= Math.Abs(Change.DebtChange))
                 {
                     Debt.DebtChange -= Change.DebtChange;
-                    EraseByFields(Change);
-                } else
+                    eraseByFields(Change);
+                } 
+                else
                 {
-                    EraseByFields(Change);
+                    eraseByFields(Change);
                     Change.DebtChange += sign * Debt.DebtChange;
                     if (Change.DebtChange != 0) db.Insert(Change);
                     isMore = true;
@@ -88,12 +86,12 @@ namespace DManager.DataSource
             }
         }
 
-        public void EraseByName(string Name)
+        static public void eraseByName(string Name)
         {
             db.Table<DebtModel>().Delete(Change => Change.Name == Name);
         }
 
-        public void EraseByFields(DebtModel Debt)
+        static public void eraseByFields(DebtModel Debt)
         {
             db.Table<DebtModel>().Delete(Change => (Change.Name == Debt.Name && Change.DebtChange == Debt.DebtChange && Change.Description == Debt.Description));
         }

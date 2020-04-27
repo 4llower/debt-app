@@ -51,7 +51,9 @@ namespace DManager
             ToolbarItems.Add(CreateDebt);
 
             /*
-                   REFRESH TOOL 
+            *******************************************
+            **************REFRESH TOOL***************** 
+            
 
             ToolbarItem RefreshButton = new ToolbarItem
             {
@@ -70,7 +72,9 @@ namespace DManager
             };
 
             ToolbarItems.Add(RefreshButton); 
-            
+
+            *******************************************
+            *******************************************
             */
         }
 

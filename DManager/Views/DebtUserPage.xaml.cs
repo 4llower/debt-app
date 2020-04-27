@@ -18,16 +18,15 @@ namespace DManager.Views
         private DebtModel CurrentSelectItem;
         private string UserName;
         private double CurrentDebt;
-        private DebtController Worker;
         public DebtUserPage(PreviewDebtModel DebtInfo)
         {
             InitializeComponent();
             UserName = DebtInfo.Name;
             CurrentDebt = DebtInfo.DebtSum;
-            Worker = new DebtController();
             CurrentSelectItem = new DebtModel();
             Refresh();
 
+            // Add debt button ********
             ToolbarItem AddDebtButton = new ToolbarItem
             {
                 Text = "Add Debt",
@@ -45,30 +44,12 @@ namespace DManager.Views
             };
 
             ToolbarItems.Add(AddDebtButton);
-
-            ToolbarItem RefreshButton = new ToolbarItem
-            {
-                Text = "Refresh",
-                Order = ToolbarItemOrder.Primary,
-                Priority = 0,
-                Icon = new FileImageSource
-                {
-                    File = "iconRefresh.png"
-                }
-            };
-
-            RefreshButton.Clicked +=  (s, e) =>
-            {
-                Refresh();
-            };
-
-            ToolbarItems.Add(RefreshButton);
+            //********
         }
 
         private void DeleteDebtButton_Clicked(object sender, EventArgs e)
         {
-            DebtController Worker = new DebtController();
-            Worker.EraseByName(UserName);
+            DebtController.eraseByName(UserName);
             
             DisplayAlert("Success", "Your debt has been successfully deleted.", "OK");
 
@@ -96,7 +77,7 @@ namespace DManager.Views
                 return;
             }
 
-            Worker.EraseByFields(CurrentSelectItem);
+            DebtController.eraseByFields(CurrentSelectItem);
             CurrentSelectItem.Name = "";
 
             CurrentDebt -= CurrentSelectItem.DebtChange;
@@ -104,7 +85,7 @@ namespace DManager.Views
 
             ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
 
-            if (Worker.GetNumberChanges(CurrentSelectItem.Name) == 0) Navigation.PopAsync();
+            if (DebtController.getNumberChanges(CurrentSelectItem.Name) == 0) Navigation.PopAsync();
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

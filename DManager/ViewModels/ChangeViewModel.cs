@@ -13,7 +13,7 @@ namespace DManager.ViewModels
         public ChangeViewModel(string Name)
         {
             ChangeList = new ObservableCollection<Models.DebtModel>();
-            foreach (DebtModel Change in (new DebtController()).GetAllChanges().FindAll(Change => Change.Name == Name)) ChangeList.Add(Change);  
+            foreach (DebtModel Change in DebtController.getAllChanges().FindAll(Change => Change.Name == Name)) ChangeList.Add(Change);  
         }
     }
 }

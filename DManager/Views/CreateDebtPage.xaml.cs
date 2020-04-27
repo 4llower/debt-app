@@ -1,4 +1,5 @@
 ﻿using DManager.DataSource;
+using DManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,6 @@ namespace DManager.Views
                 return;
             }
 
-            var Worker = new DebtController();
-
             if (double.TryParse(ValueField.Text, out double value) == false)
             {
                 DisplayAlert("Error", "Please enter the correct number", "OK");
@@ -46,14 +45,14 @@ namespace DManager.Views
 
             if (styleSwitch.IsToggled) value = -value;
 
-            Models.DebtModel Item = new Models.DebtModel()
+            var Item = new DebtModel()
             {
                 Name = Char.ToUpper(NameField.Text[0]) + NameField.Text.Substring(1),
                 DebtChange = value,
                 Description = !string.IsNullOrEmpty(DescriptionField.Text) ? Char.ToUpper(DescriptionField.Text[0]) + DescriptionField.Text.Substring(1) : ""
             };
 
-            Worker.MakeChange(Item);
+            DebtController.createChange(Item);
 
             DisplayAlert("Success", "Your debt has been successfully created.", "OK");
             ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();

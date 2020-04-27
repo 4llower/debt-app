@@ -1,4 +1,5 @@
-﻿using DManager.Models;
+﻿using DManager.DataSource;
+using DManager.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,9 @@ namespace DManager.ViewModels
 
             PreviewList = new ObservableCollection<PreviewDebtModel>();
 
-            DataSource.DebtController _context = new DataSource.DebtController();
-
             Dictionary<string, double> Assume = new Dictionary<string, double>();
 
-            foreach (DebtModel Change in _context.GetAllChanges())
+            foreach (DebtModel Change in DebtController.getAllChanges())
             {
                 if (!Assume.ContainsKey(Change.Name)) Assume.Add(Change.Name, Change.DebtChange);
                 else
