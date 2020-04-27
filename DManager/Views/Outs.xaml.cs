@@ -18,7 +18,7 @@ namespace DManager
         public Outs()
         {
             InitializeComponent();
-            Refresh();
+            refresh();
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -27,7 +27,7 @@ namespace DManager
             Navigation.PushAsync(new DebtUserPage(temp));
         }
 
-        public void Refresh()
+        public void refresh()
         {
             BindingContext = new DebtViewModel(false);
         }

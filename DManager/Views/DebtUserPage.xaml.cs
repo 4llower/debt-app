@@ -54,7 +54,7 @@ namespace DManager.Views
             
             DisplayAlert("Success", "Your debt has been successfully deleted.", "OK");
 
-            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
 
             Navigation.PopAsync();
         }
@@ -84,7 +84,7 @@ namespace DManager.Views
             CurrentDebt -= CurrentSelectItem.DebtChange;
             Refresh();
 
-            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
 
             if (DebtController.getNumberChanges(CurrentSelectItem.Name) == 0) Navigation.PopAsync();
         }

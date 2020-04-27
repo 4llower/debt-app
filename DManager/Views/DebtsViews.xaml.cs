@@ -83,10 +83,10 @@ namespace DManager
             currentPageName = CurrentPage.Title;
         }
 
-        public void Refresh()
+        public void refresh()
         {
-            ((Comings)Children.ElementAt(0)).Refresh();
-            ((Outs)Children.ElementAt(1)).Refresh();
+            ((Comings)Children.ElementAt(0)).refresh();
+            ((Outs)Children.ElementAt(1)).refresh();
         }
     }
 }

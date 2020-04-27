@@ -55,7 +55,7 @@ namespace DManager.Views
             DebtController.createChange(Item);
 
             DisplayAlert("Success", "Your debt has been successfully created.", "OK");
-            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
             Navigation.PopAsync();
         }
     }

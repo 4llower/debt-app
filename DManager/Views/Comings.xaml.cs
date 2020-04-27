@@ -17,10 +17,10 @@ namespace DManager
         public Comings()
         {
             InitializeComponent();
-            Refresh();
+            refresh();
         }
 
-        public void Refresh()
+        public void refresh()
         {
             BindingContext = new ViewModels.DebtViewModel(true);
         }
