@@ -40,6 +40,7 @@ namespace DManager.Views
 
             AddDebtButton.Clicked += (s, e) =>
             {
+                Navigation.PopAsync();
                 Navigation.PushAsync(new CreateDebtPage("Comings", DebtInfo.Name));
             };
 
