@@ -12,6 +12,7 @@ namespace DManager.DataSource
     {
         static string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DebtDatabase.db");
         static SQLiteConnection db = new SQLiteConnection(dbpath);
+        static CreateTableResult tableCreationResult = db.CreateTable<DebtModel>();
 
         static public List<DebtModel> getAllChanges()
         {
