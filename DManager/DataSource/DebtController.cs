@@ -16,7 +16,6 @@ namespace DManager.DataSource
 
         static public List<DebtModel> getAllChanges()
         {
-            db.CreateTable<DebtModel>();
             List <DebtModel> Changes = db.Table<DebtModel>().ToList();
             Changes.Sort(delegate (DebtModel x, DebtModel y)
             {
