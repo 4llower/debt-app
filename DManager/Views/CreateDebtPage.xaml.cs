@@ -18,10 +18,10 @@ namespace DManager.Views
         public CreateDebtPage(string currentPage, string Name)
         {
             InitializeComponent();
-            NameField.Text = Name;
             styleSwitch.IsToggled = (currentPage == "Comings") ? false : true;
+            NameField.Text = Name;
         }
-
+                                               
         private void DebtButton_Clicked(object sender, EventArgs e)
         {
   
