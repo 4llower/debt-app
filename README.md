@@ -8,7 +8,7 @@ App to calculating and managing your debts.
 
 ## Install
 
-Download apk: [DManager]{https://drive.google.com/open?id=1y6-lcB_sTjt98Pl0qn_-4dz8TCWqhQqK}
+Download apk: [DManager](https://drive.google.com/open?id=1y6-lcB_sTjt98Pl0qn_-4dz8TCWqhQqK)
 
 1. Clone repository
 ~~~
