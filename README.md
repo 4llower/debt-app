@@ -1,12 +1,12 @@
 # DManager
 
-##Description
+## Description
 
 This mobile aplication to calculate simple debts. 
 You can add debt for person, or take money from him and write this operations in the app.
 App to calculating and managing your debts. 
 
-##Install
+## Install
 
 Download apk: [DManager]{https://drive.google.com/open?id=1y6-lcB_sTjt98Pl0qn_-4dz8TCWqhQqK}
 
@@ -18,7 +18,7 @@ git clone https://github.com/4llower/DManager
 
 3. Build project (Install Xamarin.Forms)
 
-##Properties
+## Properties
 
 * SQLite connection for save debt data
 * User-friendly interface
