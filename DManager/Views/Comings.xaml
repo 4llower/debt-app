@@ -6,32 +6,41 @@
              mc:Ignorable="d"
              x:Class="DManager.Comings"
              Title ="Comings">
-    <ListView ItemsSource="{Binding PreviewList}"
-              HasUnevenRows="True"
-              BackgroundColor="#ecf0f1"
-              SeparatorVisibility="None"
-              HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand"
-              ItemTapped ="ListView_ItemTapped"
-              SelectionMode="None">
+    <AbsoluteLayout>
+        <ListView ItemsSource="{Binding PreviewList}"
+                  HasUnevenRows="True"
+                  BackgroundColor="#ecf0f1"
+                  SeparatorVisibility="None"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  ItemTapped ="ListView_ItemTapped"
+                  SelectionMode="None"
+                  x:Name="ListDebts">
 
-        <ListView.ItemTemplate>
+            <ListView.ItemTemplate>
 
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout Margin="6,4,6,4"
-                                 BackgroundColor="White">
-                        <Label Text="{Binding Name}"
-                               Margin="8"
-                               FontAttributes="Bold"
-                               FontSize="Medium" />
-                        <Label Text="{Binding DebtSum}"
-                               Margin="8,2,8,4"
-                               FontSize="Small" />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="6,4,6,4"
+                                     BackgroundColor="White">
+                            <Label Text="{Binding Name}"
+                                   Margin="8"
+                                   FontAttributes="Bold"
+                                   FontSize="Medium" />
+                            <Label Text="{Binding DebtSum}"
+                                   Margin="8,2,8,4"
+                                   FontSize="Small" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
 
-        </ListView.ItemTemplate>
-    </ListView>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ImageButton Source="iconAdd.png" 
+                x:Name="AddButton"
+                BackgroundColor="Transparent"
+                AbsoluteLayout.LayoutFlags="PositionProportional"  
+                AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
+                Clicked="AddButton_Clicked"/>
+    </AbsoluteLayout>
 </ContentPage>

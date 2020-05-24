@@ -1,10 +1,5 @@
 ﻿using DManager.Models;
 using DManager.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,6 +24,11 @@ namespace DManager
         {
             PreviewDebtModel temp = (PreviewDebtModel)e.Item;
             Navigation.PushAsync(new DebtUserPage(temp));
+        }
+
+        private void AddButton_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new CreateDebtPage("Comings", new DebtModel() { Date = "", Name = "", Description = "", DebtChange = 0 }));
         }
     }
 }

@@ -7,5 +7,4 @@
             mc:Ignorable="d"
              x:Class="DManager.DebtsViews"
             Title="DManager">
-  <!--Pages can be added as references or inline-->
 </TabbedPage>

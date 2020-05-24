@@ -2,10 +2,7 @@
 using DManager.Models;
 using DManager.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,83 +12,77 @@ namespace DManager.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DebtUserPage : ContentPage
     {
-        private DebtModel CurrentSelectItem;
-        private string UserName;
-        private double CurrentDebt;
+        private string personalityName;
         public DebtUserPage(PreviewDebtModel DebtInfo)
         {
             InitializeComponent();
-            UserName = DebtInfo.Name;
-            CurrentDebt = DebtInfo.DebtSum;
-            CurrentSelectItem = new DebtModel();
+            personalityName = DebtInfo.Name;
             Refresh();
 
-            // Add debt button ********
-            ToolbarItem AddDebtButton = new ToolbarItem
+            /* Close all debts */
+            ToolbarItem closeDebtsItem = new ToolbarItem
             {
-                Text = "Add Debt",
-                Order = ToolbarItemOrder.Primary,
-                Priority = 0,
-                Icon = new FileImageSource
+                Text = "Сlose all debts",
+                Order = ToolbarItemOrder.Default,
+                Priority = 0
+            };
+
+            closeDebtsItem.Clicked += async (s, e) =>
+            {
+                bool result = await DisplayAlert("Warning", "Are you sure you want to close all debts?", "Yes", "No");
+
+                if (result == true)
                 {
-                    File = "iconAdd.png"
+                    DBContext.eraseByName(personalityName);
+                    ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
+                    await Navigation.PopAsync();
                 }
             };
 
-            AddDebtButton.Clicked += (s, e) =>
+            /* Add buttons on nav bar */
+            ToolbarItems.Add(closeDebtsItem);
+        }
+
+        public void Refresh()
+        {
+            var _context = new ChangeViewModel(personalityName);
+
+            if (_context.ChangeList.Count == 0)
             {
+                ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
                 Navigation.PopAsync();
-                Navigation.PushAsync(new CreateDebtPage("Comings", DebtInfo.Name));
-            };
-
-            ToolbarItems.Add(AddDebtButton);
-            //********
-        }
-
-        private void DeleteDebtButton_Clicked(object sender, EventArgs e)
-        {
-            DebtController.eraseByName(UserName);
-            
-            DisplayAlert("Success", "Your debt has been successfully deleted.", "OK");
-
-            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
-
-            Navigation.PopAsync();
-        }
-
-        private bool IsEmpty(DebtModel Value)
-        {
-            return String.IsNullOrEmpty(Value.Name);
-        }
-
-        void Refresh()
-        {
-            BindingContext = new ChangeViewModel(UserName);
-            Title = UserName + " = " + CurrentDebt.ToString();
-        }
-
-        private void DeleteSelectButton_Clicked(object sender, EventArgs e)
-        {
-            if (IsEmpty(CurrentSelectItem))
-            {
-                DisplayAlert("Error", "You are not select the debt.", "OK");
                 return;
             }
 
-            DebtController.eraseByFields(CurrentSelectItem);
-            CurrentSelectItem.Name = "";
-
-            CurrentDebt -= CurrentSelectItem.DebtChange;
-            Refresh();
-
-            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
-
-            if (DebtController.getNumberChanges(CurrentSelectItem.Name) == 0) Navigation.PopAsync();
+            BindingContext = _context;
+            Title = personalityName + ": " + DBContext.getSummaryDebtByName(personalityName).ToString();
         }
 
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void AddButton_Clicked(object sender, EventArgs e)
         {
-            CurrentSelectItem = (DebtModel)e.SelectedItem;
+            Navigation.PushAsync(new CreateDebtPage("Comings", new DebtModel() { Name = personalityName, DebtChange = 0, Description = "", Date = "" }));
+        }
+
+        private async void PersonalDebts_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            string result = await DisplayActionSheet("What to do...", "Cancel", null, "Close this debt", "Change this debt");
+            var debtInfo = (DebtModel)e.Item;
+
+            if (result == "Close this debt")
+            {
+                bool decision = await DisplayAlert("Warning", String.Format("Are you sure you want close this debt({0}, {1}, {2})", debtInfo.DebtChange.ToString(), debtInfo.Description, debtInfo.Date), "YES", "NO");
+
+                if (decision == true)
+                {
+                    DBContext.eraseByFields(debtInfo);
+                    Refresh();
+                }
+            }
+
+            if (result == "Change this debt")
+            {
+                await Navigation.PushAsync(new CreateDebtPage("Comings", debtInfo));
+            }
         }
     }
 }

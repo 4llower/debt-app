@@ -1,10 +1,7 @@
 ﻿using DManager.DataSource;
 using DManager.Models;
-using SQLite;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 
 namespace DManager.ViewModels
 {
@@ -22,7 +19,7 @@ namespace DManager.ViewModels
 
             Dictionary<string, double> Assume = new Dictionary<string, double>();
 
-            foreach (DebtModel Change in DebtController.getAllChanges())
+            foreach (DebtModel Change in DBContext.getAllChanges())
             {
                 if (!Assume.ContainsKey(Change.Name)) Assume.Add(Change.Name, Change.DebtChange);
                 else

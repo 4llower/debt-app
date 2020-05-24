@@ -1,9 +1,6 @@
 ﻿using DManager.DataSource;
 using DManager.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace DManager.ViewModels
 {
@@ -13,7 +10,7 @@ namespace DManager.ViewModels
         public ChangeViewModel(string Name)
         {
             ChangeList = new ObservableCollection<Models.DebtModel>();
-            foreach (DebtModel Change in DebtController.getAllChanges().FindAll(Change => Change.Name == Name)) ChangeList.Add(Change);  
+            foreach (DebtModel Change in DBContext.getAllChanges().FindAll(Change => Change.Name == Name)) ChangeList.Add(Change);
         }
     }
 }

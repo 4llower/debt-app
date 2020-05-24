@@ -4,25 +4,37 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace DManager.DataSource
 {
-    public static class DebtController
+    public static class DBContext
     {
-        static string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DebtDatabase.db");
-        static SQLiteConnection db = new SQLiteConnection(dbpath);
+        static SQLiteConnection db = new SQLiteConnection(Settings.dbpath);
         static CreateTableResult tableCreationResult = db.CreateTable<DebtModel>();
 
         static public List<DebtModel> getAllChanges()
         {
-            List <DebtModel> Changes = db.Table<DebtModel>().ToList();
+            List<DebtModel> Changes = db.Table<DebtModel>().ToList();
             Changes.Sort(delegate (DebtModel x, DebtModel y)
             {
                 if (x.DebtChange == y.DebtChange) return 0;
                 return x.DebtChange > y.DebtChange ? 1 : -1;
             });
             return Changes;
+        }
+
+        static public double getSummaryDebtByName(string Name)
+        {
+            var _context = db.Table<DebtModel>().ToList();
+            _context = _context.FindAll(Change => Change.Name == Name);
+
+            double result = 0;
+            foreach (var item in _context)
+            {
+                result += item.DebtChange;
+            }
+
+            return result;
         }
 
         static public int getNumberChanges(string UserName)
@@ -41,7 +53,7 @@ namespace DManager.DataSource
                     db.Insert(Debt);
                     return;
                 }
-            } 
+            }
             else
             {
                 if (Debt.DebtChange < 0)
@@ -68,7 +80,7 @@ namespace DManager.DataSource
                 {
                     Debt.DebtChange -= Change.DebtChange;
                     eraseByFields(Change);
-                } 
+                }
                 else
                 {
                     eraseByFields(Change);

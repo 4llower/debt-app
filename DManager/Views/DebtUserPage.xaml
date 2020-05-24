@@ -5,35 +5,42 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="DManager.Views.DebtUserPage">
-    <StackLayout>
-        <Button x:Name="DeleteDebtButton" Clicked="DeleteDebtButton_Clicked" Text="Close all debts"></Button>
-        <Button x:Name="DeleteSelectButton" Clicked="DeleteSelectButton_Clicked"  Text="Select and close selected debt"></Button>
-        <ListView ItemsSource="{Binding ChangeList}"
-                  HasUnevenRows="True"
-                  BackgroundColor="#ecf0f1"
-                  SeparatorVisibility="None"
-                  HorizontalOptions="FillAndExpand"
-                  VerticalOptions="FillAndExpand"
-                  ItemSelected="ListView_ItemSelected">
+    <AbsoluteLayout>
+        <StackLayout>
+            <ListView ItemsSource="{Binding ChangeList}"
+                      HasUnevenRows="True"
+                      BackgroundColor="#ecf0f1"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      ItemTapped="PersonalDebts_ItemTapped"
+                      x:Name="PersonalDebts">
 
-            <ListView.ItemTemplate>
+                <ListView.ItemTemplate>
 
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Margin="6,4,6,4"
-                                     BackgroundColor="White">
-                            <Label Text="{Binding DebtChange}"
-                                   Margin="8"
-                                   FontAttributes="Bold"
-                                   FontSize="Medium" />
-                            <Label Text="{Binding Description}"
-                                   Margin="8,2,8,4"
-                                   FontSize="Small" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="6,4,6,4"
+                                         BackgroundColor="White">
+                                <Label Text="{Binding DebtChange}"
+                                       Margin="8"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium" />
+                                <Label Text="{Binding Description}"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
 
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <ImageButton Source="iconAdd.png" 
+                x:Name="AddButton"
+                BackgroundColor="Transparent"
+                AbsoluteLayout.LayoutFlags="PositionProportional"  
+                AbsoluteLayout.LayoutBounds=".95,.95,80,80" 
+                Clicked="AddButton_Clicked"/>
+    </AbsoluteLayout>
 </ContentPage>

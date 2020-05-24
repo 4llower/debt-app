@@ -1,11 +1,6 @@
 ﻿using DManager.Models;
 using DManager.ViewModels;
 using DManager.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -30,6 +25,11 @@ namespace DManager
         public void refresh()
         {
             BindingContext = new DebtViewModel(false);
+        }
+
+        private void AddButton_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new CreateDebtPage("Outs", new DebtModel() { Date = "", Name = "", Description = "", DebtChange = 0 }));
         }
     }
 }
