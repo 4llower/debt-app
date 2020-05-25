@@ -65,7 +65,16 @@ namespace DManager.ViewModels
                     break;
             }
 
-            foreach (DebtModel Change in _context) ChangeList.Add(Change);
+            foreach (var item in _context)
+            {
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                item.Date = DateTime.ParseExact(item.Date, "dd-MM-yyyy", provider).ToString("dddd, dd MMMM yyyy");
+            }
+
+            foreach (var item in _context)
+            {
+                ChangeList.Add(item);
+            }
         }
     }
 }
