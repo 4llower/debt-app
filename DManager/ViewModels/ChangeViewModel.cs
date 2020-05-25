@@ -22,8 +22,8 @@ namespace DManager.ViewModels
                     _context.Sort(delegate (DebtModel x, DebtModel y)
                     {
                         CultureInfo provider = CultureInfo.InvariantCulture;
-                        DateTime a = DateTime.ParseExact(x.Date, "dd-MM-yyyy", provider);
-                        DateTime b = DateTime.ParseExact(y.Date, "dd-MM-yyyy", provider);
+                        DateTime a = DateTime.ParseExact(x.Date, "dddd, dd MMMM yyyy", provider);
+                        DateTime b = DateTime.ParseExact(y.Date, "dddd, dd MMMM yyyy", provider);
                         if (a == b)
                         {
                             return 0;
@@ -38,8 +38,8 @@ namespace DManager.ViewModels
                     _context.Sort(delegate (DebtModel x, DebtModel y)
                     {
                         CultureInfo provider = CultureInfo.InvariantCulture;
-                        DateTime a = DateTime.ParseExact(x.Date, "dd-MM-yyyy", provider);
-                        DateTime b = DateTime.ParseExact(y.Date, "dd-MM-yyyy", provider);
+                        DateTime a = DateTime.ParseExact(x.Date, "dddd, dd MMMM yyyy", provider);
+                        DateTime b = DateTime.ParseExact(y.Date, "dddd, dd MMMM yyyy", provider);
                         if (a == b)
                         {
                             return 0;
@@ -77,12 +77,6 @@ namespace DManager.ViewModels
 
                 default:
                     break;
-            }
-
-            foreach (DebtModel item in _context)
-            {
-                CultureInfo provider = CultureInfo.InvariantCulture;
-                item.Date = DateTime.ParseExact(item.Date, "dd-MM-yyyy", provider).ToString("dddd, dd MMMM yyyy");
             }
 
             foreach (DebtModel item in _context)
