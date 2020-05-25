@@ -122,7 +122,7 @@ namespace DManager.Data
 
             while (valueSameRows > 0)
             {
-                createChange(Debt);
+                db.Insert(Debt);
                 valueSameRows--;
             }
         }
