@@ -6,8 +6,10 @@ namespace DManager.Models
 {
     public enum TypeSort
     {
-        ByDate, 
-        ByValue,
+        ByDateOldFirst,
+        ByDateNewFirst,
+        ByValueLargeFirst,
+        ByValueSmallFirst,
         Default
     }
 }

@@ -19,7 +19,7 @@ namespace DManager.ViewModels
             
             switch (typeSort)
             {
-                case TypeSort.ByDate:
+                case TypeSort.ByDateOldFirst:
 
                     _context.Sort(delegate (DebtModel x, DebtModel y) 
                     {
@@ -31,12 +31,33 @@ namespace DManager.ViewModels
                     });
                     break;
 
-                case TypeSort.ByValue:
+                case TypeSort.ByDateNewFirst:
+
+                    _context.Sort(delegate (DebtModel x, DebtModel y)
+                    {
+                        CultureInfo provider = CultureInfo.InvariantCulture;
+                        var a = DateTime.ParseExact(x.Date, "dd-MM-yyyy", provider);
+                        var b = DateTime.ParseExact(y.Date, "dd-MM-yyyy", provider);
+                        if (a == b) return 0;
+                        return a < b ? 1 : -1;
+                    });
+                    break;
+
+                case TypeSort.ByValueLargeFirst:
 
                     _context.Sort(delegate (DebtModel x, DebtModel y)
                     {
                         if (x.DebtChange == y.DebtChange) return 0;
                         return x.DebtChange < y.DebtChange ? 1 : -1;
+                    });
+                    break;
+
+                case TypeSort.ByValueSmallFirst:
+
+                    _context.Sort(delegate (DebtModel x, DebtModel y)
+                    {
+                        if (x.DebtChange == y.DebtChange) return 0;
+                        return x.DebtChange > y.DebtChange ? 1 : -1;
                     });
                     break;
 

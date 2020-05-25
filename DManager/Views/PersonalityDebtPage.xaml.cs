@@ -39,36 +39,64 @@ namespace DManager.Views
                 }
             };
 
-            /* Sorting by date */
-            ToolbarItem sortByDateItem = new ToolbarItem
+            /* Sorting by date (old first)*/
+            ToolbarItem sortByDateOldFirstItem = new ToolbarItem
             {
-                Text = "Sort by date",
+                Text = "Sort by date (old first)",
                 Order = ToolbarItemOrder.Secondary,
                 Priority = 1
             };
 
-            sortByDateItem.Clicked += (s, e) =>
+            sortByDateOldFirstItem.Clicked += (s, e) =>
             {
-                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByDate);
+                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByDateOldFirst);
             };
 
-            /* Sorting by value */
-            ToolbarItem sortByValueItem = new ToolbarItem
+            /* Sorting by date (new first)*/
+            ToolbarItem sortByDateNewFirstItem = new ToolbarItem
             {
-                Text = "Sort by debt value",
+                Text = "Sort by date (new first)",
                 Order = ToolbarItemOrder.Secondary,
                 Priority = 2
             };
 
-            sortByValueItem.Clicked += (s, e) =>
+            sortByDateNewFirstItem.Clicked += (s, e) =>
             {
-                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByValue);
+                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByDateNewFirst);
+            };
+
+            /* Sorting by value (large first) */
+            ToolbarItem sortByValueLargeFirstItem = new ToolbarItem
+            {
+                Text = "Sort by value (large first)",
+                Order = ToolbarItemOrder.Secondary,
+                Priority = 3
+            };
+
+            sortByValueLargeFirstItem.Clicked += (s, e) =>
+            {
+                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByValueLargeFirst);
+            };
+
+            /* Sorting by value (small first) */
+            ToolbarItem sortByValueSmallFirstItem = new ToolbarItem
+            {
+                Text = "Sort by value (small first)",
+                Order = ToolbarItemOrder.Secondary,
+                Priority = 4
+            };
+
+            sortByValueSmallFirstItem.Clicked += (s, e) =>
+            {
+                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByValueSmallFirst);
             };
 
             /* Add buttons on nav bar */
             ToolbarItems.Add(closeDebtsItem);
-            ToolbarItems.Add(sortByDateItem);
-            ToolbarItems.Add(sortByValueItem);
+            ToolbarItems.Add(sortByDateOldFirstItem);
+            ToolbarItems.Add(sortByDateNewFirstItem);
+            ToolbarItems.Add(sortByValueLargeFirstItem);
+            ToolbarItems.Add(sortByValueSmallFirstItem);
         }
 
         public void Refresh()
