@@ -44,12 +44,12 @@ namespace DManager.Views
             {
                 Text = "Sort by date",
                 Order = ToolbarItemOrder.Secondary,
-                Priority = 0
+                Priority = 1
             };
 
             sortByDateItem.Clicked += (s, e) =>
             {
-
+                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByDate);
             };
 
             /* Sorting by value */
@@ -57,12 +57,12 @@ namespace DManager.Views
             {
                 Text = "Sort by debt value",
                 Order = ToolbarItemOrder.Secondary,
-                Priority = 0
+                Priority = 2
             };
 
-            sortByDateItem.Clicked += (s, e) =>
+            sortByValueItem.Clicked += (s, e) =>
             {
-
+                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByValue);
             };
 
             /* Add buttons on nav bar */
@@ -73,7 +73,7 @@ namespace DManager.Views
 
         public void Refresh()
         {
-            var _context = new ChangeViewModel(personalityName);
+            var _context = new ChangeViewModel(personalityName, TypeSort.Default);
 
             if (_context.ChangeList.Count == 0)
             {

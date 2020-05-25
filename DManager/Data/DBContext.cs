@@ -24,6 +24,11 @@ namespace DManager.Data
             return Changes;
         }
 
+        static public List<DebtModel> getChangesByName(string Name)
+        {
+            return db.Table<DebtModel>().ToList().FindAll(Change => Change.Name == Name);
+        }
+
         static public double getSummaryDebtByName(string Name)
         {
             var _context = db.Table<DebtModel>().ToList();

@@ -1,16 +1,50 @@
 ﻿using DManager.Data;
 using DManager.Models;
+using SQLitePCL;
+using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
 
 namespace DManager.ViewModels
 {
     public class ChangeViewModel
     {
         public ObservableCollection<DebtModel> ChangeList { get; set; }
-        public ChangeViewModel(string Name)
+        public ChangeViewModel(string Name, TypeSort typeSort)
         {
             ChangeList = new ObservableCollection<Models.DebtModel>();
-            foreach (DebtModel Change in DBContext.getAllChanges().FindAll(Change => Change.Name == Name)) ChangeList.Add(Change);
+
+            var _context = DBContext.getChangesByName(Name);
+            
+            switch (typeSort)
+            {
+                case TypeSort.ByDate:
+
+                    _context.Sort(delegate (DebtModel x, DebtModel y) 
+                    {
+                        CultureInfo provider = CultureInfo.InvariantCulture;
+                        var a = DateTime.ParseExact(x.Date, "dd-MM-yyyy", provider);
+                        var b = DateTime.ParseExact(y.Date, "dd-MM-yyyy", provider);
+                        if (a == b) return 0;
+                        return a > b ? 1 : -1;
+                    });
+                    break;
+
+                case TypeSort.ByValue:
+
+                    _context.Sort(delegate (DebtModel x, DebtModel y)
+                    {
+                        if (x.DebtChange == y.DebtChange) return 0;
+                        return x.DebtChange < y.DebtChange ? 1 : -1;
+                    });
+                    break;
+
+                default:
+                    break;
+            }
+
+            foreach (DebtModel Change in _context) ChangeList.Add(Change);
         }
     }
 }
