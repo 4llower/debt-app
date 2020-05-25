@@ -10,10 +10,10 @@ using Xamarin.Forms.Xaml;
 namespace DManager.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DebtUserPage : ContentPage
+    public partial class PersonalityDebtPage : ContentPage
     {
-        private string personalityName;
-        public DebtUserPage(PreviewDebtModel DebtInfo)
+        private readonly string personalityName;
+        public PersonalityDebtPage(PreviewDebtModel DebtInfo)
         {
             InitializeComponent();
             personalityName = DebtInfo.Name;
@@ -101,7 +101,7 @@ namespace DManager.Views
 
         public void Refresh()
         {
-            var _context = new ChangeViewModel(personalityName, TypeSort.Default);
+            ChangeViewModel _context = new ChangeViewModel(personalityName, TypeSort.Default);
 
             if (_context.ChangeList.Count == 0)
             {
@@ -122,11 +122,11 @@ namespace DManager.Views
         private async void PersonalDebts_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             string result = await DisplayActionSheet("What to do...", "Cancel", null, "Close this debt", "Change this debt");
-            var debtInfo = (DebtModel)e.Item;
+            DebtModel debtInfo = (DebtModel)e.Item;
 
             if (result == "Close this debt")
             {
-                bool decision = await DisplayAlert("Warning", String.Format("Are you sure you want close this debt({0}, {1}, {2})", debtInfo.DebtChange.ToString(), debtInfo.Description, debtInfo.Date), "YES", "NO");
+                bool decision = await DisplayAlert("Warning", string.Format("Are you sure you want close this debt({0}, {1}, {2})", debtInfo.DebtChange.ToString(), debtInfo.Description, debtInfo.Date), "YES", "NO");
 
                 if (decision == true)
                 {

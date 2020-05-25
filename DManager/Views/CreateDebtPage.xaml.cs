@@ -13,7 +13,7 @@ namespace DManager.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateDebtPage : ContentPage
     {
-        private DebtModel debtInfo;
+        private readonly DebtModel debtInfo;
         public CreateDebtPage(string currentPage, DebtModel debtInfo)
         {
             InitializeComponent();
@@ -21,11 +21,11 @@ namespace DManager.Views
             DateDebtStart.Date = DateTime.Now;
             this.debtInfo = debtInfo;
 
-            if (String.IsNullOrEmpty(debtInfo.Name) == false)
+            if (string.IsNullOrEmpty(debtInfo.Name) == false)
             {
                 NameField.IsReadOnly = true;
                 NameField.Text = debtInfo.Name;
-                if (String.IsNullOrEmpty(debtInfo.Date) == false)
+                if (string.IsNullOrEmpty(debtInfo.Date) == false)
                 {
                     CultureInfo provider = CultureInfo.InvariantCulture;
                     DateDebtStart.Date = DateTime.ParseExact(debtInfo.Date, "dd-MM-yyyy", provider);
@@ -56,26 +56,29 @@ namespace DManager.Views
                 return;
             }
 
-            if (styleSwitch.IsToggled) value = -value;
-
-            var Item = new DebtModel()
+            if (styleSwitch.IsToggled)
             {
-                Name = Char.ToUpper(NameField.Text[0]) + NameField.Text.Substring(1),
+                value = -value;
+            }
+
+            DebtModel Item = new DebtModel()
+            {
+                Name = char.ToUpper(NameField.Text[0]) + NameField.Text.Substring(1),
                 DebtChange = value,
-                Description = !string.IsNullOrEmpty(DescriptionField.Text) ? Char.ToUpper(DescriptionField.Text[0]) + DescriptionField.Text.Substring(1) : "",
+                Description = !string.IsNullOrEmpty(DescriptionField.Text) ? char.ToUpper(DescriptionField.Text[0]) + DescriptionField.Text.Substring(1) : "",
                 Date = DateDebtStart.Date.ToString("dd-MM-yyyy")
             };
 
-            if (String.IsNullOrEmpty(debtInfo.Date) == false)
+            if (string.IsNullOrEmpty(debtInfo.Date) == false)
             {
                 DBContext.eraseByFields(debtInfo);
             }
 
             DBContext.createChange(Item);
 
-            if (String.IsNullOrEmpty(debtInfo.Name) == false)
+            if (string.IsNullOrEmpty(debtInfo.Name) == false)
             {
-                ((DebtUserPage)Navigation.NavigationStack.ToList<Page>()[1]).Refresh();
+                ((PersonalityDebtPage)Navigation.NavigationStack.ToList<Page>()[1]).Refresh();
             }
 
             DisplayAlert("Success", "Your debt has been successfully created.", "OK");

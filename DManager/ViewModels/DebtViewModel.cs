@@ -21,7 +21,10 @@ namespace DManager.ViewModels
 
             foreach (DebtModel Change in DBContext.getAllChanges())
             {
-                if (!Assume.ContainsKey(Change.Name)) Assume.Add(Change.Name, Change.DebtChange);
+                if (!Assume.ContainsKey(Change.Name))
+                {
+                    Assume.Add(Change.Name, Change.DebtChange);
+                }
                 else
                 {
                     Assume[Change.Name] += Change.DebtChange;

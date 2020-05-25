@@ -2,40 +2,42 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Xamarin.Forms;
 
 namespace DManager.Data
 {
     public static class DBContext
     {
-        static SQLiteConnection db = new SQLiteConnection(Settings.dbpath);
-        static CreateTableResult tableCreationResult = db.CreateTable<DebtModel>();
+        private static readonly SQLiteConnection db = new SQLiteConnection(Settings.dbpath);
+        private static readonly CreateTableResult tableCreationResult = db.CreateTable<DebtModel>();
 
-        static public List<DebtModel> getAllChanges()
+        public static List<DebtModel> getAllChanges()
         {
             List<DebtModel> Changes = db.Table<DebtModel>().ToList();
             Changes.Sort(delegate (DebtModel x, DebtModel y)
             {
-                if (x.DebtChange == y.DebtChange) return 0;
+                if (x.DebtChange == y.DebtChange)
+                {
+                    return 0;
+                }
+
                 return x.DebtChange > y.DebtChange ? 1 : -1;
             });
             return Changes;
         }
 
-        static public List<DebtModel> getChangesByName(string Name)
+        public static List<DebtModel> getChangesByName(string Name)
         {
             return db.Table<DebtModel>().ToList().FindAll(Change => Change.Name == Name);
         }
 
-        static public double getSummaryDebtByName(string Name)
+        public static double getSummaryDebtByName(string Name)
         {
-            var _context = db.Table<DebtModel>().ToList();
+            List<DebtModel> _context = db.Table<DebtModel>().ToList();
             _context = _context.FindAll(Change => Change.Name == Name);
 
             double result = 0;
-            foreach (var item in _context)
+            foreach (DebtModel item in _context)
             {
                 result += item.DebtChange;
             }
@@ -43,12 +45,12 @@ namespace DManager.Data
             return result;
         }
 
-        static public int getNumberChanges(string UserName)
+        public static int getNumberChanges(string UserName)
         {
             return db.Table<DebtModel>().Count(Change => Change.Name == UserName);
         }
 
-        static public void createChange(DebtModel Debt)
+        public static void createChange(DebtModel Debt)
         {
             List<DebtModel> ChangesByName = db.Table<DebtModel>().ToList().FindAll(Change => Change.Name == Debt.Name);
 
@@ -71,7 +73,11 @@ namespace DManager.Data
 
             ChangesByName.Sort(delegate (DebtModel x, DebtModel y)
             {
-                if (x.DebtChange == y.DebtChange) return 0;
+                if (x.DebtChange == y.DebtChange)
+                {
+                    return 0;
+                }
+
                 return Math.Abs(x.DebtChange) > Math.Abs(y.DebtChange) ? 1 : -1;
             });
 
@@ -91,7 +97,11 @@ namespace DManager.Data
                 {
                     eraseByFields(Change);
                     Change.DebtChange += sign * Debt.DebtChange;
-                    if (Change.DebtChange != 0) db.Insert(Change);
+                    if (Change.DebtChange != 0)
+                    {
+                        db.Insert(Change);
+                    }
+
                     isMore = true;
                     break;
                 }
@@ -104,17 +114,17 @@ namespace DManager.Data
             }
         }
 
-        static public void eraseByName(string Name)
+        public static void eraseByName(string Name)
         {
             db.Table<DebtModel>().Delete(Change => Change.Name == Name);
         }
 
-        static public void eraseByFields(DebtModel Debt)
+        public static void eraseByFields(DebtModel Debt)
         {
             int valueSameRows = db.Table<DebtModel>().Count(change =>
                 change.Name == Debt.Name &&
-                change.Date == Debt.Date && 
-                change.Description == Debt.Description && 
+                change.Date == Debt.Date &&
+                change.Description == Debt.Description &&
                 change.DebtChange == Debt.DebtChange
             ) - 1;
 

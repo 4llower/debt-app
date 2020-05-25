@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="DManager.Views.DebtUserPage">
+             x:Class="DManager.Views.PersonalityDebtPage">
     <AbsoluteLayout>
         <StackLayout>
             <ListView ItemsSource="{Binding ChangeList}"

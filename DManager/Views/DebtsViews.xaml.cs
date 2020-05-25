@@ -1,6 +1,4 @@
-﻿using DManager.Models;
-using DManager.Views;
-using System;
+﻿using System;
 using System.Linq;
 
 using Xamarin.Forms;

@@ -23,7 +23,7 @@ namespace DManager
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             PreviewDebtModel temp = (PreviewDebtModel)e.Item;
-            Navigation.PushAsync(new DebtUserPage(temp));
+            Navigation.PushAsync(new PersonalityDebtPage(temp));
         }
 
         private void AddButton_Clicked(object sender, System.EventArgs e)
