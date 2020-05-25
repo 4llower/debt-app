@@ -2,7 +2,6 @@
 using DManager.Models;
 using DManager.ViewModels;
 using System;
-using System.Globalization;
 using System.Linq;
 
 using Xamarin.Forms;

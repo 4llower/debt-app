@@ -14,7 +14,8 @@
                       HorizontalOptions="FillAndExpand"
                       VerticalOptions="FillAndExpand"
                       ItemTapped="PersonalDebts_ItemTapped"
-                      x:Name="PersonalDebts">
+                      x:Name="PersonalDebts"
+                      SelectionMode="None">
 
                 <ListView.ItemTemplate>
 

@@ -1,8 +1,6 @@
 ﻿using DManager.Models;
 using SQLite;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DManager.Data
 {
@@ -52,66 +50,7 @@ namespace DManager.Data
 
         public static void createChange(DebtModel Debt)
         {
-            List<DebtModel> ChangesByName = db.Table<DebtModel>().ToList().FindAll(Change => Change.Name == Debt.Name);
-
-            if (ChangesByName.Count(Change => Change.DebtChange > 0) != 0)
-            {
-                if (Debt.DebtChange > 0)
-                {
-                    db.Insert(Debt);
-                    return;
-                }
-            }
-            else
-            {
-                if (Debt.DebtChange < 0)
-                {
-                    db.Insert(Debt);
-                    return;
-                }
-            }
-
-            ChangesByName.Sort(delegate (DebtModel x, DebtModel y)
-            {
-                if (x.DebtChange == y.DebtChange)
-                {
-                    return 0;
-                }
-
-                return Math.Abs(x.DebtChange) > Math.Abs(y.DebtChange) ? 1 : -1;
-            });
-
-
-            int sign = (Debt.DebtChange > 0 ? 1 : -1);
-            bool isMore = false;
-            Debt.DebtChange = Math.Abs(Debt.DebtChange);
-
-            foreach (DebtModel Change in ChangesByName)
-            {
-                if (Debt.DebtChange >= Math.Abs(Change.DebtChange))
-                {
-                    Debt.DebtChange -= Change.DebtChange;
-                    eraseByFields(Change);
-                }
-                else
-                {
-                    eraseByFields(Change);
-                    Change.DebtChange += sign * Debt.DebtChange;
-                    if (Change.DebtChange != 0)
-                    {
-                        db.Insert(Change);
-                    }
-
-                    isMore = true;
-                    break;
-                }
-            }
-
-            if (isMore == false)
-            {
-                Debt.DebtChange *= sign;
-                db.Insert(Debt);
-            }
+            db.Insert(Debt);
         }
 
         public static void eraseByName(string Name)
