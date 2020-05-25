@@ -1,4 +1,4 @@
-﻿using DManager.DataSource;
+﻿using DManager.Data;
 using DManager.Models;
 using DManager.ViewModels;
 using System;
@@ -22,8 +22,8 @@ namespace DManager.Views
             /* Close all debts */
             ToolbarItem closeDebtsItem = new ToolbarItem
             {
-                Text = "Сlose all debts",
-                Order = ToolbarItemOrder.Default,
+                Text = "Close all debts",
+                Order = ToolbarItemOrder.Secondary,
                 Priority = 0
             };
 
@@ -39,8 +39,36 @@ namespace DManager.Views
                 }
             };
 
+            /* Sorting by date */
+            ToolbarItem sortByDateItem = new ToolbarItem
+            {
+                Text = "Sort by date",
+                Order = ToolbarItemOrder.Secondary,
+                Priority = 0
+            };
+
+            sortByDateItem.Clicked += (s, e) =>
+            {
+
+            };
+
+            /* Sorting by value */
+            ToolbarItem sortByValueItem = new ToolbarItem
+            {
+                Text = "Sort by debt value",
+                Order = ToolbarItemOrder.Secondary,
+                Priority = 0
+            };
+
+            sortByDateItem.Clicked += (s, e) =>
+            {
+
+            };
+
             /* Add buttons on nav bar */
             ToolbarItems.Add(closeDebtsItem);
+            ToolbarItems.Add(sortByDateItem);
+            ToolbarItems.Add(sortByValueItem);
         }
 
         public void Refresh()

@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Xamarin.Forms;
 
-namespace DManager.DataSource
+namespace DManager.Data
 {
     public static class DBContext
     {
@@ -105,7 +106,25 @@ namespace DManager.DataSource
 
         static public void eraseByFields(DebtModel Debt)
         {
-            db.Table<DebtModel>().Delete(Change => (Change.Name == Debt.Name && Change.DebtChange == Debt.DebtChange && Change.Description == Debt.Description));
+            int valueSameRows = db.Table<DebtModel>().Count(change =>
+                change.Name == Debt.Name &&
+                change.Date == Debt.Date && 
+                change.Description == Debt.Description && 
+                change.DebtChange == Debt.DebtChange
+            ) - 1;
+
+            db.Table<DebtModel>().Delete(change =>
+                change.Name == Debt.Name &&
+                change.Date == Debt.Date &&
+                change.Description == Debt.Description &&
+                change.DebtChange == Debt.DebtChange
+            );
+
+            while (valueSameRows > 0)
+            {
+                createChange(Debt);
+                valueSameRows--;
+            }
         }
     }
 }

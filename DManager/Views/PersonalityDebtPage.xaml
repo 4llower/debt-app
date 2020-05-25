@@ -29,6 +29,9 @@
                                 <Label Text="{Binding Description}"
                                        Margin="8,2,8,4"
                                        FontSize="Small" />
+                                <Label Text="{Binding Date}}"
+                                       Margin="8,2,8,4"
+                                       FontSize="Small"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
