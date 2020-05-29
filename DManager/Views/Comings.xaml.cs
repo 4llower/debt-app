@@ -12,10 +12,10 @@ namespace DManager
         public Comings()
         {
             InitializeComponent();
-            refresh();
+            Refresh();
         }
 
-        public void refresh()
+        public void Refresh()
         {
             BindingContext = new ViewModels.CommonDebtView(TypeDebtView.Coming);
         }

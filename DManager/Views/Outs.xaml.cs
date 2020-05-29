@@ -13,7 +13,7 @@ namespace DManager
         public Outs()
         {
             InitializeComponent();
-            refresh();
+            Refresh();
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -22,7 +22,7 @@ namespace DManager
             Navigation.PushAsync(new PersonalityDebtPage(temp));
         }
 
-        public void refresh()
+        public void Refresh()
         {
             BindingContext = new CommonDebtView(TypeDebtView.Out);
         }

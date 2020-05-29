@@ -34,7 +34,7 @@ namespace DManager.Views
                 if (result == true)
                 {
                     DBContext.eraseByName(personalityName);
-                    ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
+                    ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
                     await Navigation.PopAsync();
                 }
             };
@@ -105,7 +105,7 @@ namespace DManager.Views
 
             if (_context.ChangeList.Count == 0)
             {
-                ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
+                ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
                 Navigation.PopAsync();
                 return;
             }

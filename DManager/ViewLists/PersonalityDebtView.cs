@@ -3,7 +3,6 @@ using DManager.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Net.Http.Headers;
 
 namespace DManager.ViewModels
 {
@@ -23,8 +22,8 @@ namespace DManager.ViewModels
                     _context.Sort(delegate (DebtModel x, DebtModel y)
                     {
                         CultureInfo provider = CultureInfo.InvariantCulture;
-                        DateTime a = DateTime.ParseExact(x.Date, "dd/MM/yyyy", provider);
-                        DateTime b = DateTime.ParseExact(y.Date, "dd/MM/yyyy", provider);
+                        DateTime a = DateTime.ParseExact(x.Date, "dd MM yyyy", provider);
+                        DateTime b = DateTime.ParseExact(y.Date, "dd MM yyyy", provider);
                         if (a == b)
                         {
                             return 0;
@@ -39,8 +38,8 @@ namespace DManager.ViewModels
                     _context.Sort(delegate (DebtModel x, DebtModel y)
                     {
                         CultureInfo provider = CultureInfo.InvariantCulture;
-                        DateTime a = DateTime.ParseExact(x.Date, "dd/MM/yyyy", provider);
-                        DateTime b = DateTime.ParseExact(y.Date, "dd/MM/yyyy", provider);
+                        DateTime a = DateTime.ParseExact(x.Date, "dd MM yyyy", provider);
+                        DateTime b = DateTime.ParseExact(y.Date, "dd MM yyyy", provider);
                         if (a == b)
                         {
                             return 0;

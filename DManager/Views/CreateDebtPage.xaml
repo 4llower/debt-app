@@ -16,7 +16,7 @@
             <Entry HorizontalTextAlignment="Center" Placeholder="Name" WidthRequest ="85" HeightRequest="40" FontSize="17" x:Name="NameField"/>
             <Entry MaxLength="8" FontSize="17" Placeholder="Sum(BYN)" x:Name="ValueField"/>
             <Entry FontSize="17" Placeholder="Description" x:Name="DescriptionField"/>
-            <DatePicker x:Name ="DateDebtStart" Format="dd/MM/yyyy"/>
+            <DatePicker x:Name ="DateDebtStart" Format="dd MM yyyy"/>
             <Button HorizontalOptions="Center" Text="Create a Debt" x:Name="DebtButton" Clicked="DebtButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>

@@ -32,7 +32,7 @@ namespace DManager.Views
                     StackLayout_SwitchInfo.IsVisible = false;
                     DebtButton.Text = "Change debt";
                     CultureInfo provider = CultureInfo.InvariantCulture;
-                    DateDebtStart.Date = DateTime.ParseExact(debtInfo.Date, "dd/MM/yyyy", provider);
+                    DateDebtStart.Date = DateTime.ParseExact(debtInfo.Date, "dd MM yyyy", provider);
                     ValueField.Text = debtInfo.DebtChange.ToString();
                     DescriptionField.Text = debtInfo.Description;
                 }
@@ -70,7 +70,7 @@ namespace DManager.Views
                 Name = char.ToUpper(NameField.Text[0]) + NameField.Text.Substring(1),
                 DebtChange = value,
                 Description = !string.IsNullOrEmpty(DescriptionField.Text) ? char.ToUpper(DescriptionField.Text[0]) + DescriptionField.Text.Substring(1) : "",
-                Date = DateDebtStart.Date.ToString("dd/MM/yyyy")
+                Date = DateDebtStart.Date.ToString("dd MM yyyy")
             };
 
             if (string.IsNullOrEmpty(debtInfo.Date) == false)
@@ -93,7 +93,7 @@ namespace DManager.Views
             {
                 DisplayAlert("Success", "Your debt has been successfully changed.", "OK");
             }
-            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
+            ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).Refresh();
             Navigation.PopAsync();
         }
     }

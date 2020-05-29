@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DManager.Models
+﻿namespace DManager.Models
 {
     public enum TypeDebtView
     {
-        Coming, 
+        Coming,
         Out
     }
 }

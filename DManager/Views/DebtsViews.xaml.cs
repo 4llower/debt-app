@@ -29,10 +29,10 @@ namespace DManager
             currentPageName = CurrentPage.Title;
         }
 
-        public void refresh()
+        public void Refresh()
         {
-            ((Comings)Children.ElementAt(0)).refresh();
-            ((Outs)Children.ElementAt(1)).refresh();
+            ((Comings)Children.ElementAt(0)).Refresh();
+            ((Outs)Children.ElementAt(1)).Refresh();
         }
     }
 }
