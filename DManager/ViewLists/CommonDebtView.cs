@@ -5,14 +5,10 @@ using System.Collections.ObjectModel;
 
 namespace DManager.ViewModels
 {
-    public class DebtViewModel
+    public class CommonDebtView
     {
         public ObservableCollection<PreviewDebtModel> PreviewList { get; set; }
-
-        //True - Coming
-        //False - Out
-
-        public DebtViewModel(bool isComing)
+        public CommonDebtView(TypeDebtView debtType)
         {
 
             PreviewList = new ObservableCollection<PreviewDebtModel>();
@@ -33,7 +29,7 @@ namespace DManager.ViewModels
 
             foreach (KeyValuePair<string, double> PreviewValue in Assume)
             {
-                if ((isComing == true && PreviewValue.Value > 0) || (isComing == false && PreviewValue.Value < 0))
+                if ((debtType == TypeDebtView.Coming && PreviewValue.Value >= 0) || (debtType == TypeDebtView.Out && PreviewValue.Value < 0))
                 {
                     PreviewList.Add(new PreviewDebtModel() { Name = PreviewValue.Key, DebtSum = PreviewValue.Value });
                 }

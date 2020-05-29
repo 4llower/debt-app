@@ -17,7 +17,7 @@ namespace DManager
 
         public void refresh()
         {
-            BindingContext = new ViewModels.DebtViewModel(true);
+            BindingContext = new ViewModels.CommonDebtView(TypeDebtView.Coming);
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)

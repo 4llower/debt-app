@@ -24,7 +24,7 @@ namespace DManager
 
         public void refresh()
         {
-            BindingContext = new DebtViewModel(false);
+            BindingContext = new CommonDebtView(TypeDebtView.Out);
         }
 
         private void AddButton_Clicked(object sender, System.EventArgs e)

@@ -7,8 +7,8 @@
              x:Class="DManager.Views.CreateDebtPage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="14,50,14,14" Spacing ="20">
-            <Label Text="Debt Creation" Font="Bold, 40"  HorizontalOptions="Center"></Label>
-            <StackLayout Orientation="Horizontal"  HorizontalOptions="Center">
+            <Label Text="Debt Creation" Font="Bold, 40"  HorizontalOptions="Center" x:Name="Label_Info"></Label>
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="Center" x:Name="StackLayout_SwitchInfo">
                 <Label Text="Coming" Font="Bold, 15"></Label>
                 <Switch x:Name ="styleSwitch" IsToggled="true"/>
                 <Label Text="Out" Font="Bold, 15"></Label>

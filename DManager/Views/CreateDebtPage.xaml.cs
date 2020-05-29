@@ -27,6 +27,10 @@ namespace DManager.Views
                 NameField.Text = debtInfo.Name;
                 if (string.IsNullOrEmpty(debtInfo.Date) == false)
                 {
+                    Label_Info.Text = "Change the debt";
+                    styleSwitch.IsVisible = false;
+                    StackLayout_SwitchInfo.IsVisible = false;
+                    DebtButton.Text = "Change debt";
                     CultureInfo provider = CultureInfo.InvariantCulture;
                     DateDebtStart.Date = DateTime.ParseExact(debtInfo.Date, "dd/MM/yyyy", provider);
                     ValueField.Text = debtInfo.DebtChange.ToString();
@@ -81,7 +85,14 @@ namespace DManager.Views
                 ((PersonalityDebtPage)Navigation.NavigationStack.ToList<Page>()[1]).Refresh();
             }
 
-            DisplayAlert("Success", "Your debt has been successfully created.", "OK");
+            if (string.IsNullOrEmpty(debtInfo.Date) == true)
+            {
+                DisplayAlert("Success", "Your debt has been successfully created.", "OK");
+            }
+            else
+            {
+                DisplayAlert("Success", "Your debt has been successfully changed.", "OK");
+            }
             ((DebtsViews)Navigation.NavigationStack.ToList<Page>()[0]).refresh();
             Navigation.PopAsync();
         }

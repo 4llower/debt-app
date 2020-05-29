@@ -26,13 +26,20 @@
                                 <Label Text="{Binding DebtChange}"
                                        Margin="8"
                                        FontAttributes="Bold"
-                                       FontSize="Medium" />
+                                       FontSize="Medium"
+                                       IsVisible="{Binding IsMoneyDebt}"
+                                       />
+                                
                                 <Label Text="{Binding Description}"
                                        Margin="8,2,8,4"
-                                       FontSize="Small" />
-                                <Label Text="{Binding Date}}"
+                                       FontSize="Medium"
+                                       FontAttributes="Italic"
+                                       TextColor="DarkCyan"
+                                       />
+                                <Label Text="{Binding Date}"
                                        Margin="8,2,8,4"
-                                       FontSize="Small"/>
+                                       FontSize="Small"
+                                       HorizontalOptions="End"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

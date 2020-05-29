@@ -49,7 +49,7 @@ namespace DManager.Views
 
             sortByDateOldFirstItem.Clicked += (s, e) =>
             {
-                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByDateOldFirst);
+                BindingContext = new PersonalityDebtView(personalityName, TypeSort.ByDateOldFirst);
             };
 
             /* Sorting by date (new first)*/
@@ -62,7 +62,7 @@ namespace DManager.Views
 
             sortByDateNewFirstItem.Clicked += (s, e) =>
             {
-                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByDateNewFirst);
+                BindingContext = new PersonalityDebtView(personalityName, TypeSort.ByDateNewFirst);
             };
 
             /* Sorting by value (large first) */
@@ -75,7 +75,7 @@ namespace DManager.Views
 
             sortByValueLargeFirstItem.Clicked += (s, e) =>
             {
-                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByValueLargeFirst);
+                BindingContext = new PersonalityDebtView(personalityName, TypeSort.ByValueLargeFirst);
             };
 
             /* Sorting by value (small first) */
@@ -88,7 +88,7 @@ namespace DManager.Views
 
             sortByValueSmallFirstItem.Clicked += (s, e) =>
             {
-                BindingContext = new ChangeViewModel(personalityName, TypeSort.ByValueSmallFirst);
+                BindingContext = new PersonalityDebtView(personalityName, TypeSort.ByValueSmallFirst);
             };
 
             /* Add buttons on nav bar */
@@ -101,7 +101,7 @@ namespace DManager.Views
 
         public void Refresh()
         {
-            ChangeViewModel _context = new ChangeViewModel(personalityName, TypeSort.Default);
+            PersonalityDebtView _context = new PersonalityDebtView(personalityName, TypeSort.Default);
 
             if (_context.ChangeList.Count == 0)
             {

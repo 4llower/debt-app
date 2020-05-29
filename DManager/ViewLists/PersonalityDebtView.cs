@@ -3,15 +3,16 @@ using DManager.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Net.Http.Headers;
 
 namespace DManager.ViewModels
 {
-    public class ChangeViewModel
+    public class PersonalityDebtView
     {
-        public ObservableCollection<DebtModel> ChangeList { get; set; }
-        public ChangeViewModel(string Name, TypeSort typeSort)
+        public ObservableCollection<ViewDebtModel> ChangeList { get; set; }
+        public PersonalityDebtView(string Name, TypeSort typeSort)
         {
-            ChangeList = new ObservableCollection<Models.DebtModel>();
+            ChangeList = new ObservableCollection<ViewDebtModel>();
 
             System.Collections.Generic.List<DebtModel> _context = DBContext.getChangesByName(Name);
 
@@ -81,7 +82,14 @@ namespace DManager.ViewModels
 
             foreach (DebtModel item in _context)
             {
-                ChangeList.Add(item);
+                ChangeList.Add(new ViewDebtModel()
+                {
+                    Name = item.Name,
+                    Description = item.Description,
+                    DebtChange = item.DebtChange,
+                    Date = item.Date,
+                    IsMoneyDebt = item.DebtChange != 0 ? true : false
+                });
             }
         }
     }
