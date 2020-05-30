@@ -12,9 +12,7 @@ namespace DManager.ViewModels
         {
 
             PreviewList = new ObservableCollection<PreviewDebtModel>();
-
             Dictionary<string, double> Assume = new Dictionary<string, double>();
-
             foreach (DebtModel Change in DBContext.getAllChanges())
             {
                 if (!Assume.ContainsKey(Change.Name))
@@ -26,10 +24,10 @@ namespace DManager.ViewModels
                     Assume[Change.Name] += Change.DebtChange;
                 }
             }
-
             foreach (KeyValuePair<string, double> PreviewValue in Assume)
             {
-                if ((debtType == TypeDebtView.Coming && PreviewValue.Value >= 0) || (debtType == TypeDebtView.Out && PreviewValue.Value < 0))
+                if ((debtType == TypeDebtView.Coming && PreviewValue.Value >= 0) || 
+                    (debtType == TypeDebtView.Out && PreviewValue.Value < 0))
                 {
                     PreviewList.Add(new PreviewDebtModel() { Name = PreviewValue.Key, DebtSum = PreviewValue.Value });
                 }
